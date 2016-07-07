@@ -11,10 +11,11 @@ Implementation of the climate datalogger object
 
 #include "ClimateDataLogger.hpp"
 
-ClimateDataLogger::ClimateDataLogger(const int pinSaving, const int pinBlocked, DHT& dht22):
+ClimateDataLogger::ClimateDataLogger(const int pinSaving, const int pinBlocked, DHT& dht22, LiquidCrystal_I2C& lcdS):
   ledPins{pinSaving, pinBlocked},
   saving(false),
-  dht(dht22)
+  dht(dht22),
+  lcd(lcdS)
 {
 
   for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
@@ -48,13 +49,28 @@ void ClimateDataLogger::blockedLed()
 void ClimateDataLogger::begin()
 {
   this->dht.begin();
+  this->lcd.begin(16, 2);
+  this->lcd.clear();
 }
 
 // -----------------------------------------------//
 
 float ClimateDataLogger::readTemp()
 {
-  return this->dht.readTemperature();
+  float temp = this->dht.readTemperature();
+  lcd.setCursor(0, 0);
+  if (this->lastTemp > temp)
+  {
+    for (size_t i = 0; i < 16; i++)
+    {
+      lcd.print(" ");
+    }
+    lcd.setCursor(0, 0);
+  }
+  lcd.print(temp);
+
+  this->lastTemp = temp;
+  return temp;
 }
 
 // -----------------------------------------------//
