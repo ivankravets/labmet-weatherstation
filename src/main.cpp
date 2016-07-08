@@ -11,11 +11,11 @@
 #include "StationRTC.hpp"
 // -----------------------------------------------//
 
-DHT dht22(10, DHT22);
+DHT dht22(5, DHT22);
 LiquidCrystal_I2C lcd(0x3f,2,1,0,4,5,6,7,3, POSITIVE);
 
 
-ClimateDataLogger climate(13, 12, dht22, lcd);
+ClimateDataLogger climate(6, 7, dht22, lcd);
 StationRtc rtc;
 
 void setup()
