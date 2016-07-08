@@ -9,7 +9,6 @@ Interface of the climate datalogger object
 
 Created by: Joao Trevizoli Esteves
 */
-// -----------------------------------------------//
 
 #ifndef CLIMATEDATALOGGER_HPP
 #define  CLIMATEDATALOGGER_HPP
@@ -24,24 +23,19 @@ Created by: Joao Trevizoli Esteves
 #include <LiquidCrystal_I2C.h>
 // -----------------------------------------------//
 
-const size_t N_LEDS = 2;
+// const size_t N_LEDS = 2;
 
 // -----------------------------------------------//
 
 class ClimateDataLogger
 {
 public:
-  ClimateDataLogger(const int pinSaving,
-    const int pinBlocked, DHT& dht22, LiquidCrystal_I2C& lcd);
-  void savingLed();
-  void blockedLed();
+  ClimateDataLogger(DHT& dht22, LiquidCrystal_I2C& lcd);
   float readTemp();
   float readHum();
   void begin();
 
 private:
-  int ledPins[N_LEDS];
-  bool saving;
   float lastTemp;
   float lastHumid;
   DHT dht;

@@ -15,7 +15,7 @@ DHT dht22(5, DHT22);
 LiquidCrystal_I2C lcd(0x3f,2,1,0,4,5,6,7,3, POSITIVE);
 
 
-ClimateDataLogger climate(6, 7, dht22, lcd);
+ClimateDataLogger climate(dht22, lcd);
 StationRtc rtc;
 
 void setup()
@@ -29,10 +29,10 @@ climate.begin();
 
 void loop()
 {
-  climate.savingLed();
-  delay(500);
-  climate.blockedLed();
-  delay(500);
+  // climate.savingLed();
+  // delay(500);
+  // climate.blockedLed();
+  // delay(500);
 
   Serial.print("Temeperatura: ");
   Serial.print(climate.readTemp());
@@ -40,6 +40,7 @@ void loop()
   Serial.print(climate.readHum());
   Serial.print(" data: ");
   Serial.println(rtc.dateTimeNow());
+  delay(500);
 }
 
 // -----------------------------------------------//

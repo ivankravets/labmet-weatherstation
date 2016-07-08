@@ -41,6 +41,7 @@ String StationRtc::dateTimeNow()
 {
   if(!this->rtc.isrunning())
   {
+    this->rtc.begin();
     return "RTC parado";
   }
 
@@ -54,5 +55,4 @@ String StationRtc::dateTimeNow()
   return fmtDateTime;
 }
 
-// -----------------------------------------------//
 // -----------------------------------------------//
