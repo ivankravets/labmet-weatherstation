@@ -8,7 +8,7 @@
 */
 #include <Arduino.h>
 #include "ClimateDataLogger.hpp"
-
+#include "StationRTC.hpp"
 // -----------------------------------------------//
 
 DHT dht22(10, DHT22);
@@ -16,12 +16,14 @@ LiquidCrystal_I2C lcd(0x3f,2,1,0,4,5,6,7,3, POSITIVE);
 
 
 ClimateDataLogger climate(13, 12, dht22, lcd);
+StationRtc rtc;
 
 void setup()
 {
 
 Serial.begin(9600);
 climate.begin();
+// rtc.begin();
 }
 // -----------------------------------------------//
 
@@ -35,8 +37,9 @@ void loop()
   Serial.print("Temeperatura: ");
   Serial.print(climate.readTemp());
   Serial.print(" Umidade: ");
-  Serial.println(climate.readHum());
-
+  Serial.print(climate.readHum());
+  Serial.print(" data: ");
+  Serial.println(rtc.dateTimeNow());
 }
 
 // -----------------------------------------------//
