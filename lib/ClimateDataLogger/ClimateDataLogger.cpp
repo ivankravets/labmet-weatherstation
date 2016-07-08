@@ -58,17 +58,17 @@ void ClimateDataLogger::begin()
 float ClimateDataLogger::readTemp()
 {
   float temp = this->dht.readTemperature();
-  lcd.setCursor(0, 0);
+  this->lcd.setCursor(0, 0);
   if (this->lastTemp > temp)
   {
     for (size_t i = 0; i < 16; i++)
     {
-      lcd.print(" ");
+      this->lcd.print(" ");
     }
-    lcd.setCursor(0, 0);
+    this->lcd.setCursor(0, 0);
   }
-  lcd.print(temp);
-  lcd.print(" *C");
+  this->lcd.print(temp);
+  this->lcd.print(" *C");
   this->lastTemp = temp;
   return temp;
 }
@@ -77,5 +77,18 @@ float ClimateDataLogger::readTemp()
 
 float ClimateDataLogger::readHum()
 {
-  return this->dht.readHumidity();
+  float humid = this->dht.readHumidity();
+  this->lcd.setCursor(0, 1);
+  if (this->lastHumid > humid)
+  {
+    for (size_t i = 0; i < 16; i++)
+    {
+      lcd.print(" ");
+    }
+    lcd.setCursor(0, 1);
+  }
+  this->lcd.print(humid);
+  this->lcd.print(" %");
+  this->lastHumid = humid;
+  return humid;
 }
