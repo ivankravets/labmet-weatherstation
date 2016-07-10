@@ -4,23 +4,25 @@
 
 // -----------------------------------------------//
 
-SDcard::SDcard(const uint8_t pinSaving, const uint8_t pinBlocked, uint8_t chipSelectPin = 4):
+SDCard::SDCard(const uint8_t pinSaving, const uint8_t pinBlocked, uint8_t chipSelectPin):
 ledPins{pinSaving, pinBlocked},
 saving(false)
 {
   for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
-
+  chipPin = chipSelectPin;
 }
 
 // -----------------------------------------------//
 
-void SDcard::begin()
+void SDCard::begin()
 {
-
+  pinMode(this->chipPin, OUTPUT);
+  SD.begin(this->chipPin);
+  this->saving = false;
 }
 // -----------------------------------------------//
 
-void SDcard::blockedLed()
+void SDCard::blockedLed()
 {
   if (this->saving)
     this->saving = false;
@@ -29,7 +31,7 @@ void SDcard::blockedLed()
 }
 // -----------------------------------------------//
 
-void SDcard::savingLed()
+void SDCard::savingLed()
 {
   if (!this->saving)
     this->saving = true;
