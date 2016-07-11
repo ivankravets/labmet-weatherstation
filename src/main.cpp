@@ -39,6 +39,7 @@ void loop()
   Serial.print(" data: ");
   Serial.println(rtc.dateTimeNow());
   sd.blockedLed();
+  sd.logData(rtc.dateTimeNow(), climate.readHum(), climate.readTemp());
   delay(500);
 }
 
