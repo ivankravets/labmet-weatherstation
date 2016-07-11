@@ -12,11 +12,13 @@ Implementation of the climate datalogger object
 #include "ClimateDataLogger.hpp"
 
 ClimateDataLogger::ClimateDataLogger(DHT& dht22,
-  LiquidCrystal_I2C& lcdS, SDCard &sd, StationRtc &rtc):
+  LiquidCrystal_I2C& lcdS, StationRtc &rtc,
+  uint8_t csPin, uint8_t greenLed, uint8_t redLed):
   dht(dht22),
   lcd(lcdS),
-  sdcard(sd),
-  Srtc(rtc)
+  r(rtc),
+  ledPins{greenLed, redLed},
+  card(4)
 {
 
 }
@@ -25,13 +27,13 @@ ClimateDataLogger::ClimateDataLogger(DHT& dht22,
 
 void ClimateDataLogger::begin()
 {
+  for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
   this->dht.begin();
-  // this->sdcard.begin();
-  this->Srtc.begin();
   this->lcd.begin(16, 2);
   this->lcd.clear();
-  this->logTime = micros()/(1000UL * SAMPLE_INTERVAL_MS) + 1;
-  this->logTime *= 1000UL * SAMPLE_INTERVAL_MS;
+  this->r.begin();
+  this->card.begin();
+  this->logTime = SAMPLE_INTERVAL_MS;
 }
 
 // -----------------------------------------------//
@@ -76,16 +78,31 @@ float ClimateDataLogger::readHum()
 
 // -----------------------------------------------//
 
+void ClimateDataLogger::blockedLed()
+{
+  digitalWrite(ledPins[0], LOW);
+  digitalWrite(ledPins[1], HIGH);
+}
+// -----------------------------------------------//
+
+void ClimateDataLogger::savingLed()
+{
+  digitalWrite(ledPins[0], HIGH);
+  digitalWrite(ledPins[1], LOW);
+}
+
+// -----------------------------------------------//
+
 void ClimateDataLogger::save()
 {
-  this->logTime += 1000UL * SAMPLE_INTERVAL_MS;
-  if((micros() - this->logTime) < 0)
+  uint32_t currentMillis = millis();
+  if(currentMillis - this->logTime > SAMPLE_INTERVAL_MS)
   {
-    this->sdcard.logData(this->Srtc.dateTimeNow(),
+    digitalWrite(this->ledPins[0], HIGH);
+    this->logTime = currentMillis - 1;
+    this->card.logData(this->r.dateTimeNow(),
     this->readTemp(), this->readHum());
-    Serial.println("aqui");
   }
-
 }
 
 // -----------------------------------------------//

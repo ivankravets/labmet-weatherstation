@@ -11,7 +11,7 @@ const uint8_t chipSelect = SS;
 // The interval must be greater than the maximum SD write latency plus the
 // time to acquire and write data to the SD to avoid overrun errors.
 // Run the bench example to check the quality of your SD card.
-const uint32_t SAMPLE_INTERVAL_MS = 200;
+const uint32_t SAMPLE_INTERVAL_MS = 10000;
 
 // Log file base name.  Must be six characters or less.
 #define FILE_BASE_NAME "Data"

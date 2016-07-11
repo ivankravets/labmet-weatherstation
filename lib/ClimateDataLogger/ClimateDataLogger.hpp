@@ -25,27 +25,33 @@ Created by: Joao Trevizoli Esteves
 #include "StationRTC.hpp"
 // -----------------------------------------------//
 
-const uint32_t SAMPLE_INTERVAL_MS = 300;
+const uint32_t SAMPLE_INTERVAL_MS = 2000;
+const size_t N_LEDS = 2;
 
 // -----------------------------------------------//
 
 class ClimateDataLogger
 {
 public:
-  ClimateDataLogger(DHT &dht22, LiquidCrystal_I2C &lcd, SDCard &sd, StationRtc &rtc);
+  ClimateDataLogger(DHT &dht22, LiquidCrystal_I2C &lcd,
+    StationRtc &rtc, uint8_t csPin,
+    uint8_t greenLed, uint8_t redLed);
   void begin();
   float readTemp();
   float readHum();
+  void blockedLed();
+  void savingLed();
   void save();
 
 private:
+  uint8_t ledPins[N_LEDS];
   float lastTemp;
   float lastHumid;
   uint32_t logTime;
   DHT dht;
   LiquidCrystal_I2C lcd;
-  SDCard sdcard;
-  StationRtc Srtc;
+  StationRtc r;
+  SDCard card;
 
 };
 

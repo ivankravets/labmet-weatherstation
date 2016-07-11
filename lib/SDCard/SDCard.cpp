@@ -4,14 +4,11 @@
 
 // -----------------------------------------------//
 
-SDCard::SDCard(const uint8_t pinSaving, const uint8_t pinBlocked, uint8_t chipSelectPin):
-ledPins{pinSaving, pinBlocked},
-saving(false),
+SDCard::SDCard(const uint8_t pinSaving):
 sd(),
 logFile()
 {
-  for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
-  chipPin = chipSelectPin;
+  chipPin = pinSaving;
 }
 // -----------------------------------------------//
 void SDCard::begin()
@@ -22,7 +19,6 @@ void SDCard::begin()
   {
     sd.initErrorHalt();
   }
-  this->saving = false;
   this->openFile();
   this->csvHeader();
 }
@@ -44,7 +40,6 @@ void SDCard::openFile()
   }
   while (this->sd.exists(fileName))
   {
-    Serial.println(this->sd.exists(fileName));
     if (fileName[BASE_NAME_SIZE + 1] != '9')
     {
       fileName[BASE_NAME_SIZE + 1]++;
@@ -59,12 +54,12 @@ void SDCard::openFile()
       error("Can't create file name");
     }
   }
-  Serial.println(fileName);
   if (!this->logFile.open(fileName, O_CREAT | O_WRITE | O_EXCL))
   {
     error("file.open");
   }
-
+  Serial.print("Saving at ");
+  Serial.println(fileName);
 }
 // -----------------------------------------------//
 void SDCard::csvHeader()
@@ -85,23 +80,5 @@ void SDCard::logData(String date, float temp, float humid)
     {
       error("write error");
     }
-}
-// -----------------------------------------------//
-void SDCard::blockedLed()
-{
-  if (this->saving)
-    this->saving = false;
-  digitalWrite(ledPins[0], LOW);
-  digitalWrite(ledPins[1], HIGH);
-}
-// -----------------------------------------------//
-
-void SDCard::savingLed()
-{
-  if (!this->saving)
-    this->saving = true;
-
-  digitalWrite(ledPins[0], HIGH);
-  digitalWrite(ledPins[1], LOW);
 }
 // -----------------------------------------------//
