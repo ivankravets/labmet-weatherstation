@@ -37,14 +37,15 @@ public:
     StationRtc &rtc, uint8_t csPin,
     uint8_t greenLed, uint8_t redLed);
   void begin();
+  void stop(uint8_t resetPin, uint8_t resetButton);
+  void save();
   float readTemp();
   float readHum();
   void blockedLed();
   void savingLed();
-  void save();
+
 
 private:
-  uint8_t ledPins[N_LEDS];
   float lastTemp;
   float lastHumid;
   uint32_t logTime;
@@ -52,6 +53,8 @@ private:
   LiquidCrystal_I2C lcd;
   StationRtc r;
   SDCard card;
+  uint8_t ledPins[N_LEDS];
+  void resetArduino(uint8_t resetPin);
 
 };
 

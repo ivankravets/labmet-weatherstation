@@ -1,3 +1,14 @@
+/*SDCard
+    __  _       _      ___   ___  _  _    __
+  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
+/ /   | |/ _` | '_ \ / _ \| | | | || |_   \ \
+\ \   | | (_| | |_) | (_) | |_| |__   _|  / /
+ \_\  |_|\__,_|_.__/ \___/ \___/   |_|   /_/
+
+Implementation of the SDCard wrapper object
+
+Created by: Joao Trevizoli Esteves
+*/
 
 #include "SDCard.hpp"
 
@@ -14,10 +25,10 @@ logFile()
 void SDCard::begin()
 {
   pinMode(this->chipPin, OUTPUT);
-  // SD.begin(this->chipPin);
-  if(!this->sd.begin(this->chipPin, SPI_HALF_SPEED))
+  while(!this->sd.begin(this->chipPin, SPI_HALF_SPEED))
   {
-    sd.initErrorHalt();
+    Serial.println("Insira o Cartao!");
+    delay(500);
   }
   this->openFile();
   this->csvHeader();
