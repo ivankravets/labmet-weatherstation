@@ -11,9 +11,12 @@ Implementation of the climate datalogger object
 
 #include "ClimateDataLogger.hpp"
 
-ClimateDataLogger::ClimateDataLogger(DHT& dht22, LiquidCrystal_I2C& lcdS):
+ClimateDataLogger::ClimateDataLogger(DHT& dht22,
+  LiquidCrystal_I2C& lcdS, SDCard &sd, StationRtc &rtc):
   dht(dht22),
-  lcd(lcdS)
+  lcd(lcdS),
+  sdcard(sd),
+  Srtc(rtc)
 {
 
 }
@@ -23,8 +26,12 @@ ClimateDataLogger::ClimateDataLogger(DHT& dht22, LiquidCrystal_I2C& lcdS):
 void ClimateDataLogger::begin()
 {
   this->dht.begin();
+  // this->sdcard.begin();
+  this->Srtc.begin();
   this->lcd.begin(16, 2);
   this->lcd.clear();
+  this->logTime = micros()/(1000UL * SAMPLE_INTERVAL_MS) + 1;
+  this->logTime *= 1000UL * SAMPLE_INTERVAL_MS;
 }
 
 // -----------------------------------------------//
@@ -66,3 +73,19 @@ float ClimateDataLogger::readHum()
   this->lastHumid = humid;
   return humid;
 }
+
+// -----------------------------------------------//
+
+void ClimateDataLogger::save()
+{
+  this->logTime += 1000UL * SAMPLE_INTERVAL_MS;
+  if((micros() - this->logTime) < 0)
+  {
+    this->sdcard.logData(this->Srtc.dateTimeNow(),
+    this->readTemp(), this->readHum());
+    Serial.println("aqui");
+  }
+
+}
+
+// -----------------------------------------------//

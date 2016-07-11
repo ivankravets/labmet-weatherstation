@@ -21,25 +21,32 @@ Created by: Joao Trevizoli Esteves
 #include <DHT.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
+#include "SDCard.hpp"
+#include "StationRTC.hpp"
 // -----------------------------------------------//
 
-// const size_t N_LEDS = 2;
+const uint32_t SAMPLE_INTERVAL_MS = 300;
 
 // -----------------------------------------------//
 
 class ClimateDataLogger
 {
 public:
-  ClimateDataLogger(DHT& dht22, LiquidCrystal_I2C& lcd);
+  ClimateDataLogger(DHT &dht22, LiquidCrystal_I2C &lcd, SDCard &sd, StationRtc &rtc);
+  void begin();
   float readTemp();
   float readHum();
-  void begin();
+  void save();
 
 private:
   float lastTemp;
   float lastHumid;
+  uint32_t logTime;
   DHT dht;
   LiquidCrystal_I2C lcd;
+  SDCard sdcard;
+  StationRtc Srtc;
+
 };
 
 #endif

@@ -24,9 +24,9 @@ public:
   void savingLed();
 
 private:
-  int ledPins[N_LEDS];
+  uint8_t ledPins[N_LEDS];
   bool saving;
-  int chipPin;
+  uint8_t chipPin;
   SdFat sd;
   SdFile logFile;
   void openFile();
