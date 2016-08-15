@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Example of using the non-volatile RAM storage on the DS1307.
 // You can write up to 56 bytes from address 0 to 55.
 // Data will be persisted as long as the DS1307 has battery power.

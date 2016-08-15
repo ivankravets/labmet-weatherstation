@@ -11,36 +11,27 @@
 #include "StationRTC.hpp"
 // -----------------------------------------------//
 
+
 DHT dht22(5, DHT22);
 LiquidCrystal_I2C lcd(0x3f, 16, 2 );
 
-
-ClimateDataLogger climate(dht22, lcd);
 StationRtc rtc;
+
+ClimateDataLogger climate(dht22, lcd, rtc, 4, 6, 7);
+
 
 void setup()
 {
 
 Serial.begin(9600);
 climate.begin();
-// rtc.begin();
 }
 // -----------------------------------------------//
 
 void loop()
 {
-  // climate.savingLed();
-  // delay(500);
-  // climate.blockedLed();
-  // delay(500);
 
-  Serial.print("Temeperatura: ");
-  Serial.print(climate.readTemp());
-  Serial.print(" Umidade: ");
-  Serial.print(climate.readHum());
-  Serial.print(" data: ");
-  Serial.println(rtc.dateTimeNow());
-  delay(500);
+
 }
 
 // -----------------------------------------------//

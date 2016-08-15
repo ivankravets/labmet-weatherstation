@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Date and time functions using a DS3231 RTC connected via I2C and Wire lib
 #include <Wire.h>
 #include "RTClib.h"

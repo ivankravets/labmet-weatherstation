@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Simple date conversions and calculations
 
 #include <Wire.h>

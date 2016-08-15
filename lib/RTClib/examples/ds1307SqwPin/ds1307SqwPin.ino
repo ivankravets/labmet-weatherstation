@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // SQW/OUT pin mode using a DS1307 RTC connected via I2C.
 //
 // According to the data sheet (http://datasheets.maxim-ic.com/en/ds/DS1307.pdf), the
