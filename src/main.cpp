@@ -12,7 +12,7 @@
 // -----------------------------------------------//
 
 DHT dht22(5, DHT22);
-LiquidCrystal_I2C lcd(0x3f,2,1,0,4,5,6,7,3, POSITIVE);
+LiquidCrystal_I2C lcd(0x3f, 16, 2 );
 
 
 ClimateDataLogger climate(dht22, lcd);
