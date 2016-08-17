@@ -9,28 +9,38 @@
 #include <Arduino.h>
 #include "ClimateDataLogger.hpp"
 #include "StationRTC.hpp"
+#include <ESP8266WiFi.h>
 // -----------------------------------------------//
 
+#define  LCD_ADDR 0X27
+#define DHT_PIN D4
+#define CHP_CLK_PIN D6
+#define GREEN_LED D7
+#define RED_LED D8
 
-DHT dht22(5, DHT22);
-LiquidCrystal_I2C lcd(0x3f, 16, 2 );
+// -----------------------------------------------//
+
+DHT dht22(DHT_PIN, DHT22);
+LiquidCrystal_I2C lcd(LCD_ADDR, 16, 2);
 
 StationRtc rtc;
 
-ClimateDataLogger climate(dht22, lcd, rtc, 4, 6, 7);
+ClimateDataLogger climate(dht22, lcd, rtc,
+   CHP_CLK_PIN, GREEN_LED, RED_LED);
 
 
 void setup()
 {
 
-Serial.begin(9600);
+Serial.begin(115200);
 climate.begin();
 }
 // -----------------------------------------------//
 
 void loop()
 {
-
+  delay(100);
+  climate.save();
 
 }
 

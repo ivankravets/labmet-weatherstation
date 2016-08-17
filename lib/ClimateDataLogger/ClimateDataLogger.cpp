@@ -28,7 +28,8 @@ void ClimateDataLogger::begin()
 {
   for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
   this->dht.begin();
-  this->lcd.begin(16, 2);
+  this->lcd.init();
+  this->lcd.setBacklight(HIGH);
   this->lcd.clear();
   this->r.begin();
   this->logTime = SAMPLE_INTERVAL_MS;
