@@ -21,7 +21,6 @@ Created by: Joao Trevizoli Esteves
 #include <DHT.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include "SDCard.hpp"
 #include "StationRTC.hpp"
 // -----------------------------------------------//
 
@@ -37,7 +36,6 @@ public:
     StationRtc &rtc, uint8_t csPin,
     uint8_t greenLed, uint8_t redLed);
   void begin();
-  void stop(uint8_t resetPin, uint8_t resetButton);
   void save();
   float readTemp();
   float readHum();
@@ -52,7 +50,6 @@ private:
   DHT dht;
   LiquidCrystal_I2C lcd;
   StationRtc r;
-  SDCard card;
   uint8_t ledPins[N_LEDS];
   void resetArduino(uint8_t resetPin);
 

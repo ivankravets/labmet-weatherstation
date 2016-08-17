@@ -17,7 +17,6 @@ ClimateDataLogger::ClimateDataLogger(DHT& dht22,
   dht(dht22),
   lcd(lcdS),
   r(rtc),
-  card(4),
   ledPins{greenLed, redLed}
 {
 
@@ -29,49 +28,11 @@ void ClimateDataLogger::begin()
 {
   for (size_t i = 0; i < N_LEDS; i++)pinMode(ledPins[i], OUTPUT);
   this->dht.begin();
-  this->lcd.begin(16, 2);
+  this->lcd.init();
+  this->lcd.setBacklight(HIGH);
   this->lcd.clear();
   this->r.begin();
-  this->card.begin();
   this->logTime = SAMPLE_INTERVAL_MS;
-}
-
-// -----------------------------------------------//
-
-void ClimateDataLogger::stop(uint8_t resetPin, uint8_t resetButton)
-{
-  uint8_t buttonReading = digitalRead(resetButton);
-  uint8_t turnOffArduino = 0;
-  if (buttonReading)
-  {
-    this->blockedLed();
-    this->lcd.clear();
-    this->card.stop();
-
-    lcd.setCursor(0, 0);
-    lcd.print("Remova o cartao");
-    lcd.setCursor(0, 1);
-    lcd.print("e aperte o botao");
-    while (!turnOffArduino)
-    {
-      delay(1000);
-      turnOffArduino = digitalRead(resetButton);
-    }
-
-    for (size_t i = 0; i < 5; i++)
-    {
-      this->savingLed();
-      delay(100);
-      this->blockedLed();
-      delay(100);
-    }
-    this->lcd.clear();
-    this->lcd.setCursor(0, 0);
-    this->lcd.print("Reiniciando!");
-    delay(150);
-    pinMode(resetPin, OUTPUT);
-    digitalWrite(resetPin, LOW);
-  }
 }
 
 
@@ -84,8 +45,7 @@ void ClimateDataLogger::save()
   {
     digitalWrite(this->ledPins[0], HIGH);
     this->logTime = currentMillis - 1;
-    this->card.logData(this->r.dateTimeNow(),
-    this->readTemp(), this->readHum());
+    this->readTemp(), this->readHum();
   }
 }
 
