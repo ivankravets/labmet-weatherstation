@@ -20,21 +20,24 @@ Created by: Joao Trevizoli Esteves
 class PressureSensor
 {
 public:
-PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval);
+PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval, int oversampling = 2, double seaPressure = 1013.25);
 void begin();
 float getTemperature();
-float getPressure(int oversampling = 2);
-float getAltitude(float seaPressure = 1013.25);
+float getPressure();
+float getAltitude();
 
 
 private:
-void printErrors(const char[]);
+inline void printErrors(const char[]);
 bool setTemperature();
-bool setPressure(int oversampling);
-bool setAltitude(float seaPressure);
+bool setPressure();
+bool setAltitude();
+void update();
 char status;
-uint32_t previousMillis;
+uint32_t previousUpdate;
 uint32_t updateInterval;
+int oversampling;
+double seaPressure;
 double temperature;
 double pressure;
 double altitude;

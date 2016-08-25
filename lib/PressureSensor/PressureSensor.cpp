@@ -14,15 +14,17 @@ Created by: Joao Trevizoli Esteves
 
 // ---------------------Init method---------------------------//
 
-PressureSensor::PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval):
+PressureSensor::PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval, int oversampling, double seaPressure):
 bmp180(bmp180Ptr)
 {
-  this->previousMillis = 0;
+
+  this->previousUpdate = 0;
   this->temperature = NAN;
   this->pressure = NAN;
   this->altitude  = NAN;
   this->updateInterval = updateInterval;
-
+  this->oversampling = oversampling;
+  this->seaPressure = seaPressure;
 }
 
 // ---------------------Public mtd---------------------------//
@@ -43,28 +45,28 @@ float PressureSensor::getTemperature()
   return this->temperature;
 }
 // ---------------------------------------------------------//
-float  PressureSensor::getPressure(int oversampling)
+float  PressureSensor::getPressure()
 {
-  if (0 > oversampling || oversampling > 3)
-  {
-    this->printErrors("The parameter oversampling must\
-be with a integer between 0 and 3");
-    return false;
-  }
+    if (0 > this->oversampling || this->oversampling > 3)
+    {
+      this->printErrors("The parameter oversampling must\
+  be with a integer between 0 and 3");
+      return false;
+    }
 
-  this->setPressure(oversampling);
-  Serial.println(this->pressure);
-  return this->pressure;
+    this->setPressure();
+    Serial.println(this->pressure);
+    return this->pressure;
 }
 // ---------------------------------------------------------//
-float  PressureSensor::getAltitude(float seaPressure)
+float  PressureSensor::getAltitude()
 {
-  this->setAltitude(seaPressure);
+  this->setAltitude();
   Serial.println(this->altitude);
   return this->altitude;
 }
 // ---------------------Private mtd--------------------------//
-void  PressureSensor::printErrors(const char *msg)
+inline void  PressureSensor::printErrors(const char *msg)
 {
   Serial.println(msg);
 }
@@ -84,9 +86,9 @@ temperature sensor of the bmp180 module");
     return true;
   }
 // ---------------------------------------------------------//
-bool PressureSensor::setPressure(int oversampling)
+bool PressureSensor::setPressure()
 {
-  status = this->bmp180.startPressure(oversampling);
+  status = this->bmp180.startPressure(this->oversampling);
   if (status == 0)
   {
     this->printErrors("Error while starting the\
@@ -109,17 +111,23 @@ pressure sensor of the bmp180 module");
 }
 
 // ---------------------------------------------------------//
-bool PressureSensor::setAltitude(float seaPressure)
+bool PressureSensor::setAltitude()
 {
   if(this->pressure == NAN)
   {
-    this->setPressure(2);
+    this->setPressure();
   }
-  this->altitude = this->bmp180.altitude(this->pressure, seaPressure);
+  this->altitude = this->bmp180.altitude(this->pressure, this->seaPressure);
+  return true;
 }
-
-
-// if ((millis() - this->previousMillis) > updateInterval > updateInterval)
-// {
-//
-// }
+// ---------------------------------------------------------//
+void PressureSensor::update()
+{
+    if((millis() - this->previousUpdate) > updateInterval)
+    {
+      this->previousUpdate = millis();
+      this->setTemperature();
+      this->setPressure();
+      this->setAltitude();
+    }
+}

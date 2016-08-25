@@ -30,7 +30,7 @@ SFE_BMP180 bmp180;
 ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
 
-PressureSensor pressureSensor(bmp180, 5);
+PressureSensor pressureSensor(bmp180, 1000);
 void setup()
 {
 
@@ -43,10 +43,10 @@ pressureSensor.begin();
 
 void loop()
 {
-  delay(100);
   climate.save();
+  delay(100);
   pressureSensor.getTemperature();
-  pressureSensor.getPressure(2);
+  pressureSensor.getPressure();
   pressureSensor.getAltitude();
 }
 
