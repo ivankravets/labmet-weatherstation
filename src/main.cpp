@@ -45,9 +45,7 @@ void loop()
 {
   climate.save();
   delay(100);
-  pressureSensor.getTemperature();
-  pressureSensor.getPressure();
-  pressureSensor.getAltitude();
+  pressureSensor.printAll();
 }
 
 // -----------------------------------------------//

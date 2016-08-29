@@ -25,7 +25,7 @@ void begin();
 float getTemperature();
 float getPressure();
 float getAltitude();
-
+void printAll();
 
 private:
 inline void printErrors(const char[]);
