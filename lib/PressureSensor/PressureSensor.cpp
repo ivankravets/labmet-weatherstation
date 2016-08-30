@@ -12,7 +12,7 @@ Created by: Joao Trevizoli Esteves
 
 #include "PressureSensor.hpp"
 
-// ---------------------Init method---------------------------//
+// ---------------------Init method--------------------------- //
 
 PressureSensor::PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval, int oversampling, double seaPressure):
 bmp180(bmp180Ptr)
@@ -27,12 +27,12 @@ bmp180(bmp180Ptr)
   this->seaPressure = seaPressure;
 }
 
-// ---------------------Public mtd---------------------------//
+// ---------------------Public mtd--------------------------- //
 void PressureSensor::begin()
 {
   while (!this->bmp180.begin())
   {
-    Serial.println("can't begin the bmp180 sensor");
+    Serial.println(ERROR_BMP180_START);
     delay(100);
   }
   delay(100);
@@ -40,13 +40,13 @@ void PressureSensor::begin()
   this->setPressure();
   this->setAltitude();
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 float PressureSensor::getTemperature()
 {
   this->update();
   return this->temperature;
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 float  PressureSensor::getPressure()
 {
     if (0 > this->oversampling || this->oversampling > 3)
@@ -59,13 +59,13 @@ float  PressureSensor::getPressure()
     this->update();
     return this->pressure;
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 float  PressureSensor::getAltitude()
 {
   this->update();
   return this->altitude;
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 void PressureSensor::printAll()
 {
   if((millis() - this->previousUpdate) > updateInterval)
@@ -81,12 +81,12 @@ void PressureSensor::printAll()
   this->update();
   }
 }
-// ---------------------Private mtd--------------------------//
+// ---------------------Private mtd-------------------------- //
 inline void  PressureSensor::printErrors(const char *msg)
 {
   Serial.println(msg);
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 bool PressureSensor::setTemperature()
 {
     status = this->bmp180.startTemperature();
@@ -101,7 +101,7 @@ temperature sensor of the bmp180 module");
     status = this->bmp180.getTemperature(this->temperature);
     return true;
   }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 bool PressureSensor::setPressure()
 {
   status = this->bmp180.startPressure(this->oversampling);
@@ -126,7 +126,7 @@ pressure sensor of the bmp180 module");
   return true;
 }
 
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 bool PressureSensor::setAltitude()
 {
   if(this->pressure == NAN)
@@ -136,7 +136,7 @@ bool PressureSensor::setAltitude()
   this->altitude = this->bmp180.altitude(this->pressure, this->seaPressure);
   return true;
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //
 void PressureSensor::update()
 {
     if((millis() - this->previousUpdate) > updateInterval)
@@ -147,4 +147,4 @@ void PressureSensor::update()
       this->setAltitude();
     }
 }
-// ---------------------------------------------------------//
+// --------------------------------------------------------- //

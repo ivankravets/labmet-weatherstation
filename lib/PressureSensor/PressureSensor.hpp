@@ -13,7 +13,11 @@ Created by: Joao Trevizoli Esteves
 #ifndef PRESSURESENSOR_HPP
 #define PRESSURESENSOR_HPP
 
-// -----------------------------------------------//
+// ----------------Error messages------------------ //
+
+#define ERROR_BMP180_START "can't begin the bmp180 sensor"
+
+// ----------------------------------------------- //
 
 #include <SFE_BMP180.h>
 

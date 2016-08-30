@@ -7,13 +7,12 @@
 
 */
 #include <Arduino.h>
+#include <ESP8266WiFi.h>
 #include "ClimateDataLogger.hpp"
 #include "StationRTC.hpp"
 #include "PressureSensor.hpp"
-#include <ESP8266WiFi.h>
 #include "ConnectServer.hpp"
-#include <string.h>
-
+#include "format.hpp"
 
 // -----------------------------------------------//
 
@@ -69,7 +68,8 @@ void loop()
   dados += "&altitude=";
   dados.concat(pressureSensor.getAltitude());
   Conn.postPage(dados, "/");
-  delay(10000);
+  Serial.println(format("teste %d, %f, %c, %s", 10, 3.61, 'b', "Joao"));
+  delay(1000);
 }
 
 
