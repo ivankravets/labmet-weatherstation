@@ -4,6 +4,16 @@
 #ifndef CONNECTSERVER_HPP
 #define CONNECTSERVER_HPP
 
+#define CONN_SERVER  "Connecting Server"
+#define CONN_WIFI "Connecting WiFi"
+#define ERROR_WIFI "Error: Connecting to WiFi Failed"
+#define ERROR_SERVER "Error: Connection to Server Failed"
+#define CHECK_WIFI "Connection Checking"
+
+
+#define ERROR_STRING "Error: String type"
+#define ERROR_POST "Error: POST Failed"
+
 class ConnectServer
 {
 public:

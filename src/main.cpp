@@ -12,7 +12,7 @@
 #include "PressureSensor.hpp"
 #include <ESP8266WiFi.h>
 #include "ConnectServer.hpp"
-#include <string.h>
+#include "Errors.hpp"
 
 
 // -----------------------------------------------//
@@ -35,7 +35,7 @@ ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
 
 ConnectServer Conn;
-String dados;
+Errors erro;
 
 PressureSensor pressureSensor(bmp180, 1000);
 
@@ -64,11 +64,7 @@ void loop()
   delay(500);
   Conn.check_conn_server();
   delay(500);
-  dados = "temperature=";
-  dados += pressureSensor.getTemperature();
-  dados += "&altitude=";
-  dados.concat(pressureSensor.getAltitude());
-  Conn.postPage(dados, "/");
+  erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
   delay(10000);
 }
 

@@ -1,7 +1,8 @@
 #include <Arduino.h>
 #include "ConnectServer.hpp"
 #include <ESP8266WiFi.h>
-#include <string.h>
+#include "Errors.hpp"
+
 
  ConnectServer::ConnectServer()
  {
@@ -10,7 +11,8 @@
 
 void ConnectServer::begin()
 {
-  Serial.print("Connecting wifi..");
+  Serial.print(CONN_WIFI);
+  // salvar conexao sd
   Serial.println(WiFi.status());
 
   if (WiFi.status() == WL_CONNECTED)
@@ -23,7 +25,7 @@ void ConnectServer::begin()
   {
     delay(500);
     Serial.print(WiFi.status());
-    Serial.print("Connection checking!");
+    Serial.print(CHECK_WIFI);
   }
 
   Serial.println("WiFi connected");
@@ -32,14 +34,20 @@ void ConnectServer::begin()
 
 }
 
-/*
-Metodo mutcho loko
-*/
+    Errors error;
+
 void ConnectServer::postPage(String dados, String endpoints) {
+
+  int statusCodePost=0;
 
   String ContentLength = "Content-Length: ";
 
-  uint8_t cont =  dados.length();
+  String envia = "Name=";
+  envia += dados;
+
+  envia += endpoints;
+
+  uint8_t cont =  envia.length();
 
   ContentLength += cont;
 
@@ -48,9 +56,9 @@ void ConnectServer::postPage(String dados, String endpoints) {
   cliente.println("Content-Type: application/x-www-form-urlencoded");
   cliente.println(ContentLength);
   cliente.println("");
-  cliente.println(dados);
-  cliente.println(endpoints);
-  Serial.println(dados);
+  cliente.println(envia);
+  error.checkStatusCodePost(statusCodePost, envia);
+  Serial.println(envia);
   cliente.stop();
 
 }
@@ -58,14 +66,19 @@ void ConnectServer::postPage(String dados, String endpoints) {
 void ConnectServer::conn_node_server()
 {
   cliente.connect(host, httpPort);
-  Serial.println("Connecting server");
+  Serial.println(CONN_SERVER);
+  // salvar conexao sd
 }
 
 void ConnectServer::check_conn_wifi()
 {
    if (WiFi.status() == WL_CONNECTED)
       return;
-   begin();
+
+  Serial.println(ERROR_WIFI);
+  // salvar erro sd
+
+  begin();
 }
 
 void ConnectServer::check_conn_server()
@@ -75,7 +88,8 @@ void ConnectServer::check_conn_server()
   }
 
   if (!cliente.connect(host, httpPort)){
-    Serial.println("Disconnecting / Connection failed");
+    Serial.println(ERROR_SERVER);
+    // salvar erro sd
     cliente.stop();
     delay(5000);
     conn_node_server();
