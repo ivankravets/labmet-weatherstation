@@ -11,6 +11,10 @@
 #include "StationRTC.hpp"
 #include "PressureSensor.hpp"
 #include <ESP8266WiFi.h>
+#include "ConnectServer.hpp"
+#include <string.h>
+
+
 // -----------------------------------------------//
 
 #define  LCD_ADDR 0X27
@@ -30,14 +34,24 @@ SFE_BMP180 bmp180;
 ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
 
+ConnectServer Conn;
+String dados;
+
 PressureSensor pressureSensor(bmp180, 1000);
+
 void setup()
 {
-
-Serial.begin(115200);
-climate.begin();
-pressureSensor.begin();
-
+  Serial.begin(115200);
+  delay(500);
+  pressureSensor.begin();
+  Serial.println("\nWiFi begin...");
+  Conn.begin();
+  delay(500);
+  Serial.println("Server begin...");
+  Conn.conn_node_server();
+  delay(500);
+  climate.begin();
+  delay(500);
 }
 // -----------------------------------------------//
 
@@ -46,6 +60,17 @@ void loop()
   climate.save();
   delay(100);
   pressureSensor.printAll();
+  Conn.check_conn_wifi();
+  delay(500);
+  Conn.check_conn_server();
+  delay(500);
+  dados = "temperature=";
+  dados += pressureSensor.getTemperature();
+  dados += "&altitude=";
+  dados.concat(pressureSensor.getAltitude());
+  Conn.postPage(dados, "/");
+  delay(10000);
 }
+
 
 // -----------------------------------------------//
