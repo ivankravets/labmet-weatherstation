@@ -1,3 +1,15 @@
+/* Errors
+    __ _       _      ___   ___  _  _    __
+  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
+/ /   | |/ _` | '_ \ / _ \| | | | || |_   \ \
+\ \   | | (_| | |_) | (_) | |_| |__   _|  / /
+ \_\  |_|\__,_|_.__/ \___/ \___/   |_|   /_/
+
+Implementation of the climate datalogger object
+
+Created by: Barbara Panosso
+*/
+
 #include "ConnectServer.hpp"
 #include "Errors.hpp"
 
@@ -25,6 +37,8 @@ bool Errors::errors(String status, String clasS, String function, String message
 
 void Errors::checkStatusCodePost(int StatusCode, String strpost)
 {
+  // receber status code servidor ou procurar na resposta servidor
+
   if(StatusCode != 200)
       save(strpost);
   else

@@ -37,13 +37,13 @@ ClimateDataLogger climate(dht22, lcd, rtc,
 ConnectServer Conn;
 Errors erro;
 
-PressureSensor pressureSensor(bmp180, 1000);
+// PressureSensor pressureSensor(bmp180, 1000);
 
 void setup()
 {
   Serial.begin(115200);
   delay(500);
-  pressureSensor.begin();
+  // pressureSensor.begin();
   Serial.println("\nWiFi begin...");
   Conn.begin();
   delay(500);
@@ -59,12 +59,13 @@ void loop()
 {
   climate.save();
   delay(100);
-  pressureSensor.printAll();
+  // pressureSensor.printAll();
   Conn.check_conn_wifi();
   delay(500);
   Conn.check_conn_server();
   delay(500);
-  erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
+  Conn.postPage("hauahuahauhauhauhauhauahauhauhuhauha", "/main");
+  // erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
   delay(10000);
 }
 

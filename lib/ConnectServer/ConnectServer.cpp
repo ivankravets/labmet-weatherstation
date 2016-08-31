@@ -36,7 +36,7 @@ void ConnectServer::begin()
 
     Errors error;
 
-void ConnectServer::postPage(String dados, String endpoints) {
+bool ConnectServer::postPage(String dados, String endpoints) {
 
   int statusCodePost=0;
 
@@ -45,24 +45,47 @@ void ConnectServer::postPage(String dados, String endpoints) {
   String envia = "Name=";
   envia += dados;
 
-  envia += endpoints;
+  // envia += endpoints;
 
   uint8_t cont =  envia.length();
 
   ContentLength += cont;
 
   cliente.println("POST / HTTP/1.1");
-  cliente.println("Host: 192.168.1.158");
+  cliente.println("Host: 192.168.1.123" + endpoints);
   cliente.println("Content-Type: application/x-www-form-urlencoded");
   cliente.println(ContentLength);
   cliente.println("");
   cliente.println(envia);
+
+  int c = cliente.read();
+  checkingSend(c, envia);
+
+  // Read all the lines of the reply from server and print them to Serial
+  while(cliente.available()){
+      String line = cliente.readStringUntil('\r');
+      Serial.println(line);
+     }
+
   error.checkStatusCodePost(statusCodePost, envia);
+
   Serial.println(envia);
   cliente.stop();
-
 }
 
+void ConnectServer::checkingSend(int comp, String post)
+{
+
+   Serial.println(comp);
+
+    if (comp == 72){
+      return;
+    }
+      else
+      error.save(post);
+      check_conn_server();
+
+}
 void ConnectServer::conn_node_server()
 {
   cliente.connect(host, httpPort);

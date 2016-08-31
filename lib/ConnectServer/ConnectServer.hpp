@@ -22,7 +22,8 @@ public:
   void check_conn_wifi();
   void conn_node_server();
   void check_conn_server();
-  void postPage(String dados, String endpoint);
+  void checkingSend(int retorn, String post);
+  bool postPage(String dados, String endpoint);
 
 
 private:
