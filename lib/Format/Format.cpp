@@ -1,15 +1,6 @@
-#ifndef FORMAT
-#define  FORMAT
+#include "Format.h"
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
-#include <stdarg.h>
-
-String format(String strFormat, ...)
+String format(const char *strFormat, ...)
 {
   int replacePosition = 0, lastPosition = 0, count = 0;
   String strToFormat = String(strFormat);
@@ -25,18 +16,24 @@ String format(String strFormat, ...)
     switch (strToFormat[replacePosition + 1])
     {
       case 'd':
+      case 'D':
         concatedString += strToFormat.substring(lastPosition, replacePosition);
         concatedString += va_arg(argv, int);
         break;
       case 'f':
+      case 'F':
+      case 'l':
+      case 'L':
         concatedString += strToFormat.substring(lastPosition, replacePosition);
         concatedString += va_arg(argv, double);
         break;
       case 'c':
+      case 'C':
         concatedString += strToFormat.substring(lastPosition, replacePosition);
         concatedString += (char)va_arg(argv, int);
         break;
       case 's':
+      case 'S':
         concatedString += strToFormat.substring(lastPosition, replacePosition);
         concatedString += va_arg(argv, const char *);
         break;
@@ -46,5 +43,3 @@ String format(String strFormat, ...)
   }
   return concatedString;
 }
-
-#endif

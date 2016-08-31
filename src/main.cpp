@@ -12,7 +12,7 @@
 #include "StationRTC.hpp"
 #include "PressureSensor.hpp"
 #include "ConnectServer.hpp"
-#include "format.hpp"
+#include "Format.h"
 
 // -----------------------------------------------//
 
@@ -33,7 +33,7 @@ SFE_BMP180 bmp180;
 ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
 
-ConnectServer Conn;
+// ConnectServer Conn;
 String dados;
 
 PressureSensor pressureSensor(bmp180, 1000);
@@ -41,14 +41,9 @@ PressureSensor pressureSensor(bmp180, 1000);
 void setup()
 {
   Serial.begin(115200);
-  delay(500);
   pressureSensor.begin();
-  Serial.println("\nWiFi begin...");
-  Conn.begin();
-  delay(500);
-  Serial.println("Server begin...");
-  Conn.conn_node_server();
-  delay(500);
+  // Conn.begin();
+  // Conn.conn_node_server();
   climate.begin();
   delay(500);
 }
@@ -59,16 +54,16 @@ void loop()
   climate.save();
   delay(100);
   pressureSensor.printAll();
-  Conn.check_conn_wifi();
+  // Conn.check_conn_wifi();
   delay(500);
-  Conn.check_conn_server();
+  // Conn.check_conn_server();
   delay(500);
   dados = "temperature=";
   dados += pressureSensor.getTemperature();
   dados += "&altitude=";
   dados.concat(pressureSensor.getAltitude());
-  Conn.postPage(dados, "/");
-  Serial.println(format("teste %d, %f, %c, %s", 10, 3.61, 'b', "Joao"));
+  // Conn.postPage(dados, "/");
+  Serial.println(format("teste %d, %f, %c, %s, %s", 10, 3.61, 'b', "Joao", "barbara"));
   delay(1000);
 }
 
