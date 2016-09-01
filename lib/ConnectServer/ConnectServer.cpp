@@ -1,16 +1,21 @@
 #include <Arduino.h>
 #include "ConnectServer.hpp"
 #include <ESP8266WiFi.h>
-#include <string.h>
+#include "Errors.hpp"
+
+// ---------------------Init method--------------------------- //
 
  ConnectServer::ConnectServer()
  {
 
  }
 
+ // ---------------------Public mtd--------------------------- //
+
 void ConnectServer::begin()
 {
-  Serial.print("Connecting wifi..");
+  Serial.print(CONN_WIFI);
+  // salvar conexao sd
   Serial.println(WiFi.status());
 
   if (WiFi.status() == WL_CONNECTED)
@@ -23,7 +28,7 @@ void ConnectServer::begin()
   {
     delay(500);
     Serial.print(WiFi.status());
-    Serial.print("Connection checking!");
+    Serial.print(CHECK_WIFI);
   }
 
   Serial.println("WiFi connected");
@@ -31,43 +36,68 @@ void ConnectServer::begin()
   Serial.println(WiFi.localIP());
 
 }
+// --------------------------------------------------------- //
+bool ConnectServer::postPage(String dados, String endpoint) {
 
-/*
-Metodo mutcho loko
-*/
-void ConnectServer::postPage(String dados, String endpoints) {
+  uint8_t statusCodePost = 0, sendCode;
+  uint8_t contentLength =  dados.length();
 
-  String ContentLength = "Content-Length: ";
+  String header = String("POST ") + endpoint +  " HTTP/1.1\r\n" +
+                  "Host: 192.168.1.168\r\n" +
+                  "Content-Type: application/x-www-form-urlencoded\r\n" +
+                  "Content-Length: "+  contentLength + "\r\n\r\n" +
+                  dados +
+                  "\r\nConnection: close\r\n";
 
-  uint8_t cont =  dados.length();
+  cliente.println(header);
 
-  ContentLength += cont;
+  sendCode = cliente.read();
+  checkingSend(sendCode, dados);
 
-  cliente.println("POST / HTTP/1.1");
-  cliente.println("Host: 192.168.1.158");
-  cliente.println("Content-Type: application/x-www-form-urlencoded");
-  cliente.println(ContentLength);
-  cliente.println("");
-  cliente.println(dados);
-  cliente.println(endpoints);
+  // Read all the lines of the reply from server and print them to Serial
+  while(cliente.available())
+  {
+      String line = cliente.readStringUntil('\r');
+      Serial.println(line);
+     }
+
+  this->checkStatusCodePost(statusCodePost, dados);
+
   Serial.println(dados);
-  cliente.stop();
+}
+// --------------------------------------------------------- //
+void ConnectServer::checkingSend(int comp, String post)
+{
+
+   Serial.println(comp);
+
+    if (comp == 72){
+      return;
+    }
+      else
+      cliente.stop();
+      this->save_errors(post);
+      check_conn_server();
 
 }
-
 void ConnectServer::conn_node_server()
 {
   cliente.connect(host, httpPort);
-  Serial.println("Connecting server");
+  Serial.println(CONN_SERVER);
+  // salvar conexao sd
 }
-
+// --------------------------------------------------------- //
 void ConnectServer::check_conn_wifi()
 {
    if (WiFi.status() == WL_CONNECTED)
       return;
-   begin();
-}
 
+  Serial.println(ERROR_WIFI);
+  // salvar erro sd
+
+  begin();
+}
+// --------------------------------------------------------- //
 void ConnectServer::check_conn_server()
 {
   if (cliente.available()) {
@@ -75,7 +105,8 @@ void ConnectServer::check_conn_server()
   }
 
   if (!cliente.connect(host, httpPort)){
-    Serial.println("Disconnecting / Connection failed");
+    Serial.println(ERROR_SERVER);
+    // salvar erro sd
     cliente.stop();
     delay(5000);
     conn_node_server();
