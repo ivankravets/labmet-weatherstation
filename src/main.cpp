@@ -12,8 +12,8 @@
 #include "StationRTC.hpp"
 #include "PressureSensor.hpp"
 #include "ConnectServer.hpp"
+#include "DS18y20.hpp"
 
-#include "Errors.hpp"
 
 
 // -----------------------------------------------//
@@ -30,13 +30,15 @@ DHT dht22(DHT_PIN, DHT22);
 LiquidCrystal_I2C lcd(LCD_ADDR, 16, 2);
 
 StationRtc rtc;
+
 SFE_BMP180 bmp180;
 
 ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
-   ConnectServer Conn;
-   Errors erro;
 
+ConnectServer Conn;
+
+DS18y20 x(D3);
    // PressureSensor pressureSensor(bmp180, 1000);
 
    void setup()
@@ -47,26 +49,32 @@ ClimateDataLogger climate(dht22, lcd, rtc,
      Serial.println("\nWiFi begin...");
      Conn.begin();
      delay(500);
-     Serial.println("Server begin...");
-     Conn.conn_node_server();
-     delay(500);
-     climate.begin();
-     delay(500);
+     x.begin();
+    //  Serial.println("Server begin...");
+    //  Conn.conn_node_server();
+    //  delay(500);
+    //  climate.begin();
+    //  delay(500);
    }
    // -----------------------------------------------//
 
    void loop()
    {
-     climate.save();
-     delay(100);
-     // pressureSensor.printAll();
      Conn.check_conn_wifi();
-     delay(500);
-     Conn.check_conn_server();
-     delay(500);
-     Conn.postPage("Name=hauahuahauhauhauhauhauahauhauhuhauha", "/");
-     // erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
+     x.checkoutSensor();
+     x.getTemperature();
      delay(10000);
+
+    //  climate.save();
+    //  delay(100);
+    //  // pressureSensor.printAll();
+    //  Conn.check_conn_wifi();
+    //  delay(500);
+    //  Conn.check_conn_server();
+    //  delay(500);
+    //  Conn.postPage("Name=hauahuahauhauhauhauhauahauhauhuhauha", "/");
+    //  // erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
+    //  delay(10000);
    }
 
 
