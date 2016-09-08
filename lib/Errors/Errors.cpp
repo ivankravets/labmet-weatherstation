@@ -10,10 +10,10 @@ Implementation of the climate datalogger object
 Created by: Barbara Panosso
 */
 
-#include "ConnectServer.hpp"
+// #include "ConnectServer.hpp"
 #include "Errors.hpp"
 
-ConnectServer Local;
+// ConnectServer Local;
 
 Errors::Errors(){}
 
@@ -31,7 +31,7 @@ bool Errors::log_errors(String status, String cls, String function, String messa
   send_msg += "&message=";
   send_msg += message;
 
-  Local.postPage(send_msg, "/errors");
+  // Local.postPage(send_msg, "/errors");
 }
 
 
