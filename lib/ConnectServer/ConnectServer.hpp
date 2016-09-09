@@ -19,7 +19,9 @@
 class ConnectServer: public Errors
 {
 public:
-  ConnectServer();
+  ConnectServer(const char* SSID, const char* PASSWORD, const char* HOST,
+    const int httpport,uint32_t updateInterval, int oversampling,
+    bool errorPrinting);
   void begin();
   void check_conn_wifi();
   void conn_node_server();
@@ -34,6 +36,10 @@ private:
   const char* host = "192.168.1.168";
   const int httpPort = 5000;
   WiFiClient cliente;
+  uint32_t updateInterval;
+  uint32_t previousUpdate;
+  int oversampling;
+  bool errorPrinting;
 };
 
 #endif

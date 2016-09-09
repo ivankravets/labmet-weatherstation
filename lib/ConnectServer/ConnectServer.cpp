@@ -1,12 +1,21 @@
 #include <Arduino.h>
 #include "ConnectServer.hpp"
 #include <ESP8266WiFi.h>
-#include "Errors.hpp"
+//#include "Errors.hpp"
 
 // ---------------------Init method--------------------------- //
 
- ConnectServer::ConnectServer()
+ ConnectServer::ConnectServer(const char* SSID, const char* PASSWORD, const char* HOST,
+   const int httpport,uint32_t updateInterval, int oversampling,
+   bool errorPrinting)
  {
+   this->ssid = SSID;
+   this->password = PASSWORD;
+   this->host = HOST;
+   this->updateInterval = updateInterval;
+   this->oversampling = oversampling;
+   this->errorPrinting = errorPrinting;
+   this->previousUpdate = 0;
 
  }
 
@@ -22,13 +31,13 @@ void ConnectServer::begin()
       return;
 
   WiFi.begin(this->ssid, this->password);
-  delay(5000);
 
-  while (WiFi.status() != WL_CONNECTED)
+  while (WiFi.status() != WL_CONNECTED && millis() - this->previousUpdate > updateInterval)
   {
-    delay(500);
+
     Serial.print(WiFi.status());
     Serial.print(CHECK_WIFI);
+    this->previousUpdate = millis();
   }
 
   Serial.println("WiFi connected");
