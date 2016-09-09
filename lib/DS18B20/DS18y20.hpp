@@ -33,24 +33,29 @@ class DS18y20
 {
       public:
         uint16_t teste2;
-        DS18y20(uint8_t one_wire_bus);
+        DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, int oversampling,
+        bool errorPrinting);
         // ~DS18y20();
-        void checkoutSensor();
+        bool checkoutSensor();
         void begin();
         void printAddress(DeviceAddress deviceAddress);
-        bool update();
-        bool getTemperature();
-
-
-
 
       private:
         inline void printErrors(const char *msg);
+        bool setTemperature();
+        bool update();
+        bool getTemperature();
         OneWire oneWire;
         DallasTemperature *sensors;
         DeviceAddress insideThermometer;
         uint8_t one_wire_b;
         Errors erro;
+        uint32_t updateInterval;
+        int oversampling;
+        bool errorPrinting;
+        uint32_t previousUpdate;
+        double temperature;
+        float temp;
 
 };
 

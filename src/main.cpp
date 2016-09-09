@@ -37,9 +37,8 @@ ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
 
 ConnectServer Conn;
-
-DS18y20 x(D3);
    // PressureSensor pressureSensor(bmp180, 1000);
+
 
    void setup()
    {
@@ -49,7 +48,7 @@ DS18y20 x(D3);
      Serial.println("\nWiFi begin...");
      Conn.begin();
      delay(500);
-     x.begin();
+
     //  Serial.println("Server begin...");
     //  Conn.conn_node_server();
     //  delay(500);
@@ -61,8 +60,7 @@ DS18y20 x(D3);
    void loop()
    {
      Conn.check_conn_wifi();
-     x.checkoutSensor();
-     x.getTemperature();
+
      delay(10000);
 
     //  climate.save();
