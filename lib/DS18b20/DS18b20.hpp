@@ -3,7 +3,7 @@
 
 // --------------------Errors------------------------ //
 
-#define ERROR_DS18B20_SENSOR "Not found sensor"
+#define ERROR_DS18B20_NOT_FOUND "DS18B20 sensor not found"
 #define ERROR_DS18B20_START "Can't begin the ds18b20 sensor"
 #define ERROR_DS18B20_NEGATIVE_TEMP "Negative temperature"
 
@@ -29,14 +29,14 @@
 #include "Errors.hpp"
 
 
-class DS18y20
+class DS18b20
 {
       public:
         uint16_t teste2;
-        DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, int oversampling,
+        DS18b20(uint8_t one_wire_bus,  uint32_t updateInterval, int oversampling,
         bool errorPrinting);
         // ~DS18y20();
-        bool checkoutSensor();
+        bool checkSensor();
         void begin();
         void printAddress(DeviceAddress deviceAddress);
 

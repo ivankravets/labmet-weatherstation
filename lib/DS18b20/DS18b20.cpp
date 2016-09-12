@@ -10,11 +10,11 @@ Implementation of the Pressure Sensor object
 Created by: Barbara Panosso
 */
 
-#include "DS18y20.hpp"
+#include "DS18b20.hpp"
 
 // ---------------------Init method--------------------------- //
 
-DS18y20:: DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval,
+DS18b20:: DS18b20(uint8_t one_wire_bus,  uint32_t updateInterval,
   int oversampling, bool errorPrinting):
 oneWire(one_wire_bus)
 {
@@ -29,13 +29,13 @@ oneWire(one_wire_bus)
 }
 
 // ---------------------Public mtd--------------------------- //
-void DS18y20::begin()
+void DS18b20::begin()
 {
   sensors->begin();
 }
 // --------------------------------------------------------- //
 
-void DS18y20::printAddress(DeviceAddress insideThermometer)
+void DS18b20::printAddress(DeviceAddress insideThermometer)
 {
   for (uint8_t i = 0; i < 8; i++)
   {
@@ -44,18 +44,18 @@ void DS18y20::printAddress(DeviceAddress insideThermometer)
   }
 }
 // --------------------------------------------------------- //
-bool DS18y20::checkoutSensor()
+bool DS18b20::checkSensor()
 {
+    Serial.println("Searching for One Wire sensors...");
     if (!sensors->getAddress(insideThermometer, this->one_wire_b))
     {
-      this->printErrors(ERROR_DS18B20_SENSOR);
+      this->printErrors(ERROR_DS18B20_NOT_FOUND);
       // erro.log_errors(ERROR_DS18B20_SENSOR_CODE, "DS18B20", "checkoutSensor", ERROR_DS18B20_SENSOR);
       this->begin();
       return false;
     }
     else
       {
-        Serial.println("Localizando sensores DS18B20...");
         Serial.print("Foi (foram) encontrado(s) ");
         Serial.print(sensors->getDeviceCount(), DEC);
         Serial.println(" sensore(s)");
@@ -68,14 +68,14 @@ bool DS18y20::checkoutSensor()
         }
 }
 // ---------------------Private mtd-------------------------- //
-inline void DS18y20::printErrors(const char *msg)
+inline void DS18b20::printErrors(const char *msg)
 {
   Serial.println(msg);
 }
 // --------------------------------------------------------- /
-bool DS18y20::setTemperature()
+bool DS18b20::setTemperature()
 {
-  if(!checkoutSensor())
+  if(!checkSensor())
   {
     if(this->errorPrinting)
       this->printErrors(ERROR_DS18B20_START);
@@ -86,7 +86,7 @@ bool DS18y20::setTemperature()
   return true;
 }
 // --------------------------------------------------------- //
-bool DS18y20::update()
+bool DS18b20::update()
 {
   if (millis() - this->oversampling > updateInterval)
   {
@@ -97,7 +97,7 @@ bool DS18y20::update()
 }
 
 // --------------------------------------------------------- //
-bool DS18y20::getTemperature()
+bool DS18b20::getTemperature()
 {
     sensors->requestTemperatures();
     this->temp = sensors->getTempC(insideThermometer);
