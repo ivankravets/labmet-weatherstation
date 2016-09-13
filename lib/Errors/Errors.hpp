@@ -30,6 +30,7 @@ class Errors
 public:
   Errors();
   virtual bool log_errors(String status, String clasS, String function, String message);
+  virtual void printErrors(const char *msg);
   virtual void save_errors(String post);  // save to eeprom and sd
   virtual void del_errors(); // delete to eeprom
   virtual void checkStatusCodePost(int code, String post);

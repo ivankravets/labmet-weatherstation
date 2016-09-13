@@ -28,14 +28,15 @@ which indicates an mal function or an error"
 // -------------------------------------------------------------------------- //
 
 #include <DallasTemperature.h>
+#include <OneWire.h>
 #include "Errors.hpp"
 #include "Format.h"
 
 class DS18b20Sensor: public Errors
 {
 public:
-  DS18b20Sensor(uint8_t one_wire_bus,  uint32_t updateInterval,
-  bool debuging);
+  uint16_t teste2;
+  DS18b20Sensor(uint8_t one_wire_bus,  uint32_t updateInterval, bool debuging = true);
   // ~DS18y20();
   void begin();
   float getTemperature();
@@ -48,6 +49,7 @@ private:
   bool update();
 
   bool debuging;
+  int oversampling;
   uint8_t one_wire_b;
   uint32_t updateInterval;
   uint32_t previousUpdate;

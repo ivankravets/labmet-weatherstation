@@ -32,6 +32,13 @@ bool Errors::log_errors(String status, String cls, String function, String messa
   send_msg += message;
 
 }
+// -------------------------------------------------------------------------- //
+
+inline void Errors::printErrors(const char *msg)
+{
+  Serial.println(msg);
+}
+// -------------------------------------------------------------------------- //
 
 
 void Errors::checkStatusCodePost(int StatusCode, String strpost)
