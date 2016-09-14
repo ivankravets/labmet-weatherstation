@@ -13,9 +13,9 @@
 #include "PressureSensor.hpp"
 #include "ConnectServer.hpp"
 #include "JsonGenerator.hpp"
-#include "Errors.hpp"
-#include "DS18b20Sensor.hpp"
-
+// #include "Errors.hpp"
+// #include "DS18b20Sensor.hpp"
+#include "DS18y20.hpp"
 // -------------------------------------------------------------------------- //
 
 #define LCD_ADDR 0X27
@@ -41,21 +41,22 @@ ClimateDataLogger climate(dht22, lcd, rtc,
 
 PressureSensor pressureSensor(bmp180, 1000);
 
-DS18b20Sensor ds18b20Sensor(D3, 50);
+DS18y20 ds18b20Sensor(D5, 500);
 
  void setup()
  {
    Serial.begin(115200);
    delay(500);
    pressureSensor.begin();
-   Serial.println("\nWiFi begin...");
+  //  Serial.println("\nWiFi begin...");
   //  Conn.begin();
-   delay(500);
-   Serial.println("Server begin...");
+  //  delay(500);
+  //  Serial.println("Server begin...");
   //  Conn.conn_node_server();
-   delay(500);
+  //  delay(500);
    climate.begin();
    delay(500);
+
    ds18b20Sensor.begin();
  }
 // -------------------------------------------------------------------------- //

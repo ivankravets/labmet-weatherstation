@@ -1,23 +1,23 @@
-/*DS18b20Sensor
+/*DS18y20
     __  _       _      ___   ___  _  _    __
   / / | | __ _| |__  ( _ ) / _ \| || |   \ \
 / /   | |/ _` | '_ \ / _ \| | | | || |_   \ \
 \ \   | | (_| | |_) | (_) | |_| |__   _|  / /
  \_\  |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 
-Implementation of the DS18b20Sensor Sensor object
+Implementation of the DS18y20 Sensor object
 
 Created by: Barbara Panosso
 */
 
-#include "DS18b20Sensor.hpp"
+#include "DS18y20.hpp"
 
 // -------------------------Init method-------------------------------------- //
 
-DS18b20Sensor::DS18b20Sensor(uint8_t one_wire_bus,  uint32_t updateInterval,
-  bool debuging):
-oneWire(one_wire_bus)
+DS18y20::DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, bool debuging)
+// oneWire(one_wire_bus)
 {
+  OneWire oneWire(D5);
   DallasTemperature sensor(&oneWire);
   sensors = &sensor;
   this->one_wire_b = one_wire_bus;
@@ -28,10 +28,13 @@ oneWire(one_wire_bus)
 }
 
 // -------------------------Public methods----------------------------------- //
-void DS18b20Sensor::begin()
+void DS18y20::begin()
 {
   sensors->begin();
-  delay(150);
+  delay(5000);
+  Serial.println(sensors->getDeviceCount());
+  Serial.println(this->one_wire_b);
+  delay(5000);
   this->checkSensor();
   if (debuging)
     this->searchForSensors();
@@ -39,7 +42,7 @@ void DS18b20Sensor::begin()
 
 // -------------------------------------------------------------------------- //
 
-float DS18b20Sensor::getTemperature()
+float DS18y20::getTemperature()
 {
   this->update();
   return  this->temperature;
@@ -47,7 +50,7 @@ float DS18b20Sensor::getTemperature()
 
 // -------------------------Private methods---------------------------------- //
 
-void DS18b20Sensor::searchForSensors()
+void DS18y20::searchForSensors()
 {
   Serial.println("Searching for One Wire sensors...");
   if (this->checkSensor())
@@ -74,18 +77,18 @@ void DS18b20Sensor::searchForSensors()
 
 // -------------------------------------------------------------------------- //
 
-void DS18b20Sensor::printAddress(DeviceAddress insideThermometer)
+void DS18y20::printAddress(DeviceAddress deviceAddress)
 {
   for (uint8_t i = 0; i < 8; i++)
   {
-    if (insideThermometer[i] < 16) Serial.print("0");
-    Serial.print(insideThermometer[i], HEX);
+    if (deviceAddress[i] < 16) Serial.print("0");
+    Serial.print(deviceAddress[i], HEX);
   }
 }
 
 // -------------------------------------------------------------------------- //
 
-bool DS18b20Sensor::checkSensor()
+bool DS18y20::checkSensor()
 {
     if (!sensors->getAddress(this->thermometerAddr, this->one_wire_b))
     {
@@ -100,7 +103,7 @@ bool DS18b20Sensor::checkSensor()
 
 // -------------------------------------------------------------------------- //
 
-bool DS18b20Sensor::setTemperature()
+bool DS18y20::setTemperature()
 {
   if(!checkSensor())
   {
@@ -123,10 +126,9 @@ bool DS18b20Sensor::setTemperature()
 }
 
 // -------------------------------------------------------------------------- //
-bool DS18b20Sensor::update()
+bool DS18y20::update()
 {
-  if ((millis() - this->oversampling > updateInterval) || \
-  this->temperature == NAN)
+  if ((millis() - this->previousUpdate > updateInterval) || this->temperature == NAN)
   {
     this->previousUpdate = millis();
     this->setTemperature();
