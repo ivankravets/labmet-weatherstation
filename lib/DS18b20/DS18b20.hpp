@@ -10,8 +10,8 @@ Interface of the DS18b20 Sensor object
 Created by: Barbara Panosso
 */
 
-#ifndef DS18Y20_HPP
-#define DS18Y20_HPP
+#ifndef DS18B20_HPP
+#define DS18B20_HPP
 
 // -------------------------Errors------------------------------------------- //
 #define ERROR_DS18B20_NOT_FOUND "DS18B20 sensor not found"
@@ -31,11 +31,12 @@ which indicates an mal function or an error"
 #include "Errors.hpp"
 #include "Format.h"
 
-class DS18y20: public Errors
+class DS18b20: public Errors
 {
 public:
-  DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, bool debuging = true);
-  // ~DS18y20();
+  DS18b20(DallasTemperature &dallasPtr,  uint32_t updateInterval,
+     bool debuging = true);
+  // ~DS18b20();
   void begin();
   float getTemperature();
 
@@ -52,8 +53,8 @@ private:
   uint32_t previousUpdate;
   float temperature;
 
-  // OneWire oneWire;
-  DallasTemperature *sensors;
+  // OneWire *oneWirePtr;
+  DallasTemperature sensors;
   DeviceAddress thermometerAddr;
 
 };

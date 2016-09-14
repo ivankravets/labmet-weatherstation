@@ -15,7 +15,7 @@
 #include "JsonGenerator.hpp"
 // #include "Errors.hpp"
 // #include "DS18b20Sensor.hpp"
-#include "DS18y20.hpp"
+#include "DS18b20.hpp"
 // -------------------------------------------------------------------------- //
 
 #define LCD_ADDR 0X27
@@ -23,7 +23,7 @@
 #define CHP_CLK_PIN D6
 #define GREEN_LED D7
 #define RED_LED D8
-#define DS18B20_PIN D3
+#define ONE_WIRE_BUS D3
 
 // -------------------------------------------------------------------------- //
 
@@ -33,15 +33,18 @@ LiquidCrystal_I2C lcd(LCD_ADDR, 16, 2);
 StationRtc rtc;
 SFE_BMP180 bmp180;
 
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature ds18b20Sensor(&oneWire);
+
 ClimateDataLogger climate(dht22, lcd, rtc,
    CHP_CLK_PIN, GREEN_LED, RED_LED);
   //  ConnectServer Conn;
-   Errors erro;
+  //  Errors erro;
 
 
 PressureSensor pressureSensor(bmp180, 1000);
 
-DS18y20 ds18b20Sensor(D5, 500);
+DS18b20 ds18b20(ds18b20Sensor, 500);
 
  void setup()
  {
@@ -57,7 +60,7 @@ DS18y20 ds18b20Sensor(D5, 500);
    climate.begin();
    delay(500);
 
-   ds18b20Sensor.begin();
+   ds18b20.begin();
  }
 // -------------------------------------------------------------------------- //
 
@@ -69,6 +72,7 @@ DS18y20 ds18b20Sensor(D5, 500);
   collectedData.bmp180Temp = pressureSensor.getTemperature();
   collectedData.bmp180Alt = pressureSensor.getAltitude();
   collectedData.bmp180Press = pressureSensor.getPressure();
+  collectedData.ds18b20Temp = ds18b20.getTemperature();
   collectedData.dht22Temp = climate.readTemp();
   collectedData.dht22Humid = climate.readHum();
 
@@ -77,15 +81,7 @@ DS18y20 ds18b20Sensor(D5, 500);
 
   delete json;
   climate.save();
-   delay(100);
-   // pressureSensor.printAll();
-  //  Conn.check_conn_wifi();
-   delay(500);
-  //  Conn.check_conn_server();
-   Serial.println(ds18b20Sensor.getTemperature());
-  //  Conn.postPage("Name=hauahuahauhauhauhauhauahauhauhuhauha", "/");
-   // erro.errors("2042", "hwduhawd", "hauhauha", "funcionou");
-  //  delay(10000);
+   delay(1000);
    }
 
 
