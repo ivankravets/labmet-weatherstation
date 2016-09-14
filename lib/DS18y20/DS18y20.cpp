@@ -17,9 +17,9 @@ Created by: Barbara Panosso
 DS18y20::DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, bool debuging)
 // oneWire(one_wire_bus)
 {
-  OneWire oneWire(D5);
+  OneWire oneWire(one_wire_bus);
   DallasTemperature sensor(&oneWire);
-  sensors = &sensor;
+  this->sensors = &sensor;
   this->one_wire_b = one_wire_bus;
   this->debuging = debuging;
   this->previousUpdate = 0;
@@ -30,9 +30,9 @@ DS18y20::DS18y20(uint8_t one_wire_bus,  uint32_t updateInterval, bool debuging)
 // -------------------------Public methods----------------------------------- //
 void DS18y20::begin()
 {
-  sensors->begin();
+  this->sensors->begin();
   delay(5000);
-  Serial.println(sensors->getDeviceCount());
+  Serial.println(this->sensors->getDeviceCount());
   Serial.println(this->one_wire_b);
   delay(5000);
   this->checkSensor();
@@ -55,7 +55,7 @@ void DS18y20::searchForSensors()
   Serial.println("Searching for One Wire sensors...");
   if (this->checkSensor())
   {
-    uint8_t numberOfSensors = sensors->getDeviceCount();
+    uint8_t numberOfSensors = this->sensors->getDeviceCount();
     if (numberOfSensors > 1)
     {
       Serial.print(format("It were found %d One Wire sensors\n",
@@ -90,11 +90,11 @@ void DS18y20::printAddress(DeviceAddress deviceAddress)
 
 bool DS18y20::checkSensor()
 {
-    if (!sensors->getAddress(this->thermometerAddr, this->one_wire_b))
+    if (!this->sensors->getAddress(this->thermometerAddr, this->one_wire_b))
     {
       if (this->debuging)
         this->printErrors(ERROR_DS18B20_NOT_FOUND);
-      // this->begin();
+      this->begin();
 
       return false;
     }
@@ -111,7 +111,7 @@ bool DS18y20::setTemperature()
       this->printErrors(ERROR_DS18B20_START);
     return false;
   }
-  sensors->requestTemperatures();
+  this->sensors->requestTemperatures();
   this->temperature = sensors->getTempC(this->thermometerAddr);
 
   if(this->temperature == -127)
