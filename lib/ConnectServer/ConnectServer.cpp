@@ -5,45 +5,32 @@
 
 // ---------------------Init method--------------------------- //
 
- ConnectServer::ConnectServer(const char* SSID, const char* PASSWORD, const char* HOST,
-   const int httpport,uint32_t updateInterval, int oversampling,
-   bool errorPrinting)
+ ConnectServer::ConnectServer(const char* SSID, const char* PASSWORD,
+   const char* HOST, int httpport)
  {
    this->ssid = SSID;
    this->password = PASSWORD;
    this->host = HOST;
-   this->updateInterval = updateInterval;
-   this->oversampling = oversampling;
-   this->errorPrinting = errorPrinting;
-   this->previousUpdate = 0;
-
- }
-
- // ---------------------Public mtd--------------------------- //
+   this->httpPort = httpport;
+}
+// ---------------------Public mtd--------------------------- //
 
 void ConnectServer::begin()
 {
-  Serial.print(CONN_WIFI);
-  // salvar conexao sd
+  Serial.println(CONN_WIFI);
   Serial.println(WiFi.status());
 
   if (WiFi.status() == WL_CONNECTED)
       return;
 
   WiFi.begin(this->ssid, this->password);
+  delay(500);
 
-  while (WiFi.status() != WL_CONNECTED && millis() - this->previousUpdate > updateInterval)
-  {
-
-    Serial.print(WiFi.status());
-    Serial.print(CHECK_WIFI);
-    this->previousUpdate = millis();
-  }
-
+  Serial.print(WiFi.status());
+  Serial.println(CHECK_WIFI);
   Serial.println("WiFi connected");
   Serial.println("IP obtido: ");
   Serial.println(WiFi.localIP());
-
 }
 // --------------------------------------------------------- //
 bool ConnectServer::postPage(String dados, String endpoint) {
@@ -52,12 +39,10 @@ bool ConnectServer::postPage(String dados, String endpoint) {
   uint8_t contentLength =  dados.length();
 
   String header = String("POST ") + endpoint +  " HTTP/1.1\r\n" +
-                  "Host: 192.168.1.168\r\n" +
+                  "Host: 192.168.1.157\r\n" +
                   "Content-Type: application/x-www-form-urlencoded\r\n" +
                   "Content-Length: "+  contentLength + "\r\n\r\n" +
-                  dados +
-                  "\r\nConnection: close\r\n";
-
+                   dados +"\r\nConnection: close\r\n";
   cliente.println(header);
 
   sendCode = cliente.read();
@@ -71,13 +56,11 @@ bool ConnectServer::postPage(String dados, String endpoint) {
      }
 
   this->checkStatusCodePost(statusCodePost, dados);
-
   Serial.println(dados);
 }
 // --------------------------------------------------------- //
 void ConnectServer::checkingSend(int comp, String post)
 {
-
    Serial.println(comp);
 
     if (comp == 72){
