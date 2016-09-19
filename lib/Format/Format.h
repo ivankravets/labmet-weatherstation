@@ -10,5 +10,6 @@
 #include <stdarg.h>
 
 String format(const char *strFormat, ...);
+void printformat(const char *strFormat, ...);
 
 #endif
