@@ -1,5 +1,19 @@
-#include "WiFiConn.hpp"
+/*WiFiConn
+    __  _       _      ___   ___  _  _    __
+  / / | | __ _| |__  ( _ ) / _ \| || |   \ \
+/ /   | |/ _` | '_ \ / _ \| | | | || |_   \ \
+\ \   | | (_| | |_) | (_) | |_| |__   _|  / /
+ \_\  |_|\__,_|_.__/ \___/ \___/   |_|   /_/
 
+Implementation of the WiFiConn Sensor object
+
+This object is responsable for facilitating the management
+of the the wifi connection.
+
+Created by: Joao Trevizoli Esteves
+*/
+
+#include "WiFiConn.hpp"
 
 // -------------------------Init method-------------------------------------- //
 
@@ -8,10 +22,6 @@ WiFiConn::WiFiConn(const char* SSID, const char* Password, bool debuging)
   this->ssid = SSID;
   this->password = Password;
   this->debuging = debuging;
-  // this->reconnectTimeOut = reconnectTimeOut;
-  // this->temporaryReconnectTimeOut = reconnectTimeOut;
-  // this->previousUpdate = 0;
-
 }
 
 // -------------------------Public methods----------------------------------- //
@@ -26,59 +36,35 @@ void WiFiConn::begin()
 
 bool WiFiConn::checkWiFi()
 {
+  if (millis() - this->previousUpdate > this->ipChangeUpdateInterval)
+  {
+    this->previousUpdate = millis();
+    this->localIpChange();
+  }
   if(WiFi.status() == WL_CONNECTED)
   {
     return true;
   }
   else
   {
-    // if (millis() - this->previousUpdate > this->temporaryReconnectTimeOut)
-    // {
-    //   this->attempts++;
-    //   this->previousUpdate = millis();
-    //   temporaryReconnectTimeOut = this->reconnectTimeOut;
-    //   this->reconect();
-    // }
+    return false;
   }
 }
 
 // -------------------------------------------------------------------------- //
 
-
-// void WiFiConn::reconect()
-// {
-//   if(debuging)
-//   {
-//     printformat("Trying to reconnect to %s\n", this->ssid);
-//     if (WiFi.status() == WL_CONNECTED)
-//     {
-//       Serial.print("WiFi connected!\n IP: ");
-//       Serial.println(WiFi.localIP());
-//       return;
-//     }
-//   }
-//   WiFi.begin(this->ssid, this->password);
-//   delay(500);
-//   if (WiFi.status() == WL_CONNECTED)
-//   {
-//     this->attempts = 0;
-//     if (debuging)
-//       printformat("Reconnected to %s\n", this->ssid);
-//   }
-//   else if(this->attempts == 3)
-//   {
-//
-//     uint32_t maximumAttempsTime = 5 * this->reconnectTimeOut;
-//
-//     this->attempts = 0;
-//
-//     this->temporaryReconnectTimeOut = maximumAttempsTime;
-//     if (debuging)
-//       printformat("Reached maximum attempts when trying to connect to the wifi,\
-// trying again in %d seconds", maximumAttempsTime/1000);
-//   }
-//
-// }
+void WiFiConn::localIpChange()
+{
+  if (clientLocalIp != WiFi.localIP())
+  {
+    clientLocalIp = WiFi.localIP();
+    if (debuging)
+    {
+      Serial.print("The local IP has changed to ");
+      Serial.println(clientLocalIp);
+    }
+  }
+}
 
 // -------------------------Private methods---------------------------------- //
 
@@ -89,13 +75,15 @@ void WiFiConn::connect()
     printformat("Trying to connect to %s\n", this->ssid);
     if (WiFi.status() == WL_CONNECTED)
     {
+      clientLocalIp = WiFi.localIP();
       Serial.print("WiFi connected!\n IP: ");
-      Serial.println(WiFi.localIP());
+      Serial.println(clientLocalIp);
       return;
     }
   }
 
   if (WiFi.status() == WL_CONNECTED)
+      clientLocalIp = WiFi.localIP();
       return;
 
   WiFi.begin(this->ssid, this->password);
