@@ -8,7 +8,7 @@
 #endif
 
 #include <PubSubClient.h>
-#include "ConnectServer.hpp"
+#include <ESP8266WiFi.h>
 
 #define CONNECT_BROKER "Tentando se conectar ao Broker MQTT: "
 #define CONNECT_BROKER_START "Conectado com sucesso ao broker MQTT!"
@@ -23,17 +23,20 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length);
 class MQTTClient
 {
 public:
-  MQTTClient(const char* broker_mqtt, int broker_port);
+  MQTTClient(const char* HOST, int httpport);
   void initMQTT();
   void checkingWiFIeMQTT();
   void reconnectMQTT();
+  String printMAC();
+  String macToStr(const uint8_t* mac);
 
-private:
+protected:
+  WiFiClient wifi;
   PubSubClient MQTTLocal;
-  char exit;
+  const char* ssid;
+  const char* password;
   const char* brokermqtt;
   int brokerport;
-
 };
 
 #endif
