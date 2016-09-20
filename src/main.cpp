@@ -80,7 +80,7 @@ WiFiConn wifi(ssid, password);
   delete json;
   climate.save();
    delay(1000);
-   }
-
+  wifi.checkWiFi();
+  }
 
 // -------------------------------------------------------------------------- //
