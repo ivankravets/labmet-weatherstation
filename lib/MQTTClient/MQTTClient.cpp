@@ -2,17 +2,17 @@
 
 MQTTClient::MQTTClient(const char* HOST, int httpport)
 {
+  this->ssid = "NodeMCU01";
+  this->password = "123456";
   this->brokermqtt = HOST;
   this->brokerport = httpport;
-
-  // ConnectServer wifi(ssid, password, brokermqtt, brokerport);
 }
 // -------------------------------------------------------------------------- //
 
 void MQTTClient::initMQTT()
 {
-    MQTTLocal.setServer(brokermqtt, brokerport);   //informa qual broker e porta deve ser conectado
-    MQTTLocal.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
+    MQTTLocal.setServer(brokermqtt, brokerport);
+    MQTTLocal.setCallback(mqtt_callback);
 }
 // -------------------------------------------------------------------------- //
 
@@ -32,7 +32,7 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 }
 // -------------------------------------------------------------------------- //
 
-void MQTTClient::reconnectMQTT()
+void MQTTClient::connectMQTT()
 {
     while (!MQTTLocal.connected())
     {
@@ -52,13 +52,27 @@ void MQTTClient::reconnectMQTT()
 }
 // -------------------------------------------------------------------------- //
 
-void MQTTClient::checkingWiFIeMQTT()
+void MQTTClient::sendMsg(){
+
+  long now = millis();
+  if (now - lastMsg > 2000) {
+    lastMsg = now;
+    ++value;
+    snprintf (msg, 75, "%ld", value);
+    Serial.print("Publish message: ");
+    Serial.println(msg);
+    MQTTLocal.publish("msg", msg);
+  }
+}
+// -------------------------------------------------------------------------- //
+
+void MQTTClient::checkWiFIeMQTT()
 {
     if (MQTTLocal.connected())
       return;
 
       else
-        this->reconnectMQTT();
+        Serial.println(CONNECT_BROKER_FOUND);
 }
 // -------------------------------------------------------------------------- //
 

@@ -25,10 +25,11 @@ class MQTTClient
 public:
   MQTTClient(const char* HOST, int httpport);
   void initMQTT();
-  void checkingWiFIeMQTT();
-  void reconnectMQTT();
+  void checkWiFIeMQTT();
+  void connectMQTT();
   String printMAC();
   String macToStr(const uint8_t* mac);
+  void sendMsg();
 
 protected:
   WiFiClient wifi;
@@ -37,6 +38,9 @@ protected:
   const char* password;
   const char* brokermqtt;
   int brokerport;
+  long lastMsg = 0;
+  char msg[50];
+  int value = 0;
 };
 
 #endif
