@@ -1,3 +1,15 @@
+/* Format
+  __  _       _      ___   ___  _  _    __
+ / / | | __ _| |__  ( _ ) / _ \| || |   \ \
+/ /  | |/ _` | '_ \ / _ \| | | | || |_   \ \
+\ \  | | (_| | |_) | (_) | |_| |__   _|  / /
+ \_\ |_|\__,_|_.__/ \___/ \___/   |_|   /_/
+
+Implementation of format string functions
+
+Created by: Joao Trevizoli Esteves
+*/
+
 #include "Format.h"
 
 // -------------------------format------------------------------------------- //
@@ -95,3 +107,5 @@ void printformat(const char *strFormat, ...)
     }
   }
 }
+
+// -------------------------enf of format string functions------------------- //
