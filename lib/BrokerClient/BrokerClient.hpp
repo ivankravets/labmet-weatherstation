@@ -1,5 +1,5 @@
-#ifndef MQTTCLIENT_HPP
-#define  MQTTCLIENT_HPP
+#ifndef BROKERCLIENT_HPP
+#define  BROKERCLIENT_HPP
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -8,39 +8,38 @@
 #endif
 
 #include <PubSubClient.h>
-#include <ESP8266WiFi.h>
+#include "WiFiConn.hpp"
 
 #define CONNECT_BROKER "Tentando se conectar ao Broker MQTT: "
 #define CONNECT_BROKER_START "Conectado com sucesso ao broker MQTT!"
 #define CONNECT_BROKER_FOUND "Falha ao reconectar no broker."
 #define CONNECT_BROKER_FOUND2 "Havera nova tentatica de conexao em 2s"
-#define TOPICO_SUBSCRIBE "MQTT envia"
-#define TOPICO_PUBLISH   "MQTT recebe"
-#define ID_MQTT  "NodeMCU01"
+#define TOPICO_SUBSCRIBE "Broker envia"
+#define TOPICO_PUBLISH   "Broker recebe"
+#define ID_NODEMCU  "NodeMCU01"
 
 void mqtt_callback(char* topic, byte* payload, unsigned int length);
 
-class MQTTClient
+class BrokerClient
 {
 public:
-  MQTTClient(const char* HOST, int httpport);
-  void initMQTT();
-  void checkWiFIeMQTT();
-  void connectMQTT();
+  BrokerClient(PubSubClient broker, const char* HOST, int httpport,
+    bool debuging);
+  void begin();
+  bool checkBroker();
+  void connectBroker();
   String printMAC();
   String macToStr(const uint8_t* mac);
-  void sendMsg();
+  void sendMsg(char* topic, int length, char* str);
 
-protected:
-  WiFiClient wifi;
-  PubSubClient MQTTLocal;
-  const char* ssid;
-  const char* password;
+private:
+  PubSubClient BrokerCl;
+  const char* ssidBroker;
+  const char* passwordBroker;
   const char* brokermqtt;
   int brokerport;
-  long lastMsg = 0;
-  char msg[50];
   int value = 0;
+  bool debuging;
 };
 
 #endif

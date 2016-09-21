@@ -14,6 +14,7 @@ Created by: the <lab804> Team
 #include "JsonGenerator.hpp"
 #include "DS18b20.hpp"
 #include "WiFiConn.hpp"
+#include "BrokerClient.hpp"
 
 // -------------------------defines------------------------------------------ //
 
@@ -30,8 +31,6 @@ const char* ssid = "LAB804";
 const char* password = "l4b804!@";
 
 // -------------------------Object Instatiating------------------------------ //
-
-
 
 DHT dht22(DHT_PIN, DHT22);
 LiquidCrystal_I2C lcd(LCD_ADDR, 16, 2);
@@ -52,38 +51,48 @@ DS18b20 ds18b20(ds18b20Sensor, 500);
 
 WiFiConn wifi(ssid, password);
 
+WiFiClient wifiClient;
+PubSubClient net(wifiClient);
+
+BrokerClient mqtt(net, "192.168.1.138", 1883, 0);
 // -------------------------setup-------------------------------------------- //
 
  void setup()
  {
    Serial.begin(115200);
    delay(500);
-   pressureSensor.begin();
-   climate.begin();
+  //  pressureSensor.begin();
+  //  climate.begin();
    delay(500);
    wifi.begin();
-   ds18b20.begin();
+   delay (500);
+   mqtt.begin();
+  //  ds18b20.begin();
  }
 
 // -------------------------loop--------------------------------------------- //
 
  void loop()
  {
-  climate_data_t collectedData;
-
-  rtc.dateTimeNow().toCharArray(collectedData.date, 20);
-  collectedData.bmp180Temp = pressureSensor.getTemperature();
-  collectedData.bmp180Alt = pressureSensor.getAltitude();
-  collectedData.bmp180Press = pressureSensor.getPressure();
-  collectedData.ds18b20Temp = ds18b20.getTemperature();
-  collectedData.dht22Temp = climate.readTemp();
-  collectedData.dht22Humid = climate.readHum();
-
-  JsonGenerator *json = new JsonGenerator(collectedData);
-  json->writeResponseToSerial();
-
-  delete json;
-  climate.save();
+ char strr[2]= {0, 'A'};
+  // climate_data_t collectedData;
+  //
+  // rtc.dateTimeNow().toCharArray(collectedData.date, 20);
+  // collectedData.bmp180Temp = pressureSensor.getTemperature();
+  // collectedData.bmp180Alt = pressureSensor.getAltitude();
+  // collectedData.bmp180Press = pressureSensor.getPressure();
+  // collectedData.ds18b20Temp = ds18b20.getTemperature();
+  // collectedData.dht22Temp = climate.readTemp();
+  // collectedData.dht22Humid = climate.readHum();
+  //
+  // JsonGenerator *json = new JsonGenerator(collectedData);
+  // json->writeResponseToSerial();
+  //
+  //
+  // delete json;
+  // climate.save();
+  net.loop();
+  mqtt.sendMsg("msn", 2, strr);
    delay(1000);
   wifi.checkWiFi();
   }
