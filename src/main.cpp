@@ -14,7 +14,7 @@ Created by: the <lab804> Team
 #include "JsonGenerator.hpp"
 #include "DS18b20.hpp"
 #include "WiFiConn.hpp"
-
+#include "BH1750.hpp"
 // -------------------------defines------------------------------------------ //
 
 #define LCD_ADDR 0X27
