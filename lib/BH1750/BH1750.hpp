@@ -21,7 +21,7 @@ Created by: João Trevizoli Esteves
 
 // -------------------------Debug Directives--------------------------------- //
 
-#define BH1750_DEBUG 0
+#define BH1750_DEBUG 1
 
 // -------------------------Instructionset----------------------------------- //
 
@@ -70,15 +70,17 @@ Created by: João Trevizoli Esteves
 class BH1750
 {
 public:
-  BH1750(uint8_t BH1750Addr,
-    uint8_t mode=BH1750_CONTINUOUS_H_RESOLUTION_MODE);
+  BH1750(uint8_t mode=BH1750_CONTINUOUS_H_RESOLUTION_MODE);
   void begin();
   uint16_t readIlluminanceLevel();
-
+  uint16_t readRawValue();
 private:
-  uint8_t bh1750Addr;
   uint8_t mode;
+  uint16_t rawReading = NAN;
+
   void writeBytes(uint8_t data);
+  void readBytes();
+  void setMode(uint8_t mode);
 };
 
 #endif

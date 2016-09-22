@@ -52,6 +52,8 @@ DS18b20 ds18b20(ds18b20Sensor, 500);
 
 WiFiConn wifi(ssid, password);
 
+BH1750 bh1750;
+
 // -------------------------setup-------------------------------------------- //
 
  void setup()
@@ -63,12 +65,14 @@ WiFiConn wifi(ssid, password);
    delay(500);
    wifi.begin();
    ds18b20.begin();
+   bh1750.begin();
  }
 
 // -------------------------loop--------------------------------------------- //
 
  void loop()
  {
+  Serial.println(bh1750.readIlluminanceLevel());
   climate_data_t collectedData;
 
   rtc.dateTimeNow().toCharArray(collectedData.date, 20);
