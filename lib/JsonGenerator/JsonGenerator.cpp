@@ -21,8 +21,15 @@ void JsonGenerator::prepareData()
   newRoot["dht22_humid"] = collectedData.dht22Humid;
 }
 
-void JsonGenerator::writeResponseToSerial()
+bool JsonGenerator::writeResponseToSerial()
 {
   this->prepareData();
   this->newRoot.prettyPrintTo(Serial);
+  this->newRoot.prettyPrintTo(payload, sizeof(payload));
+  return payload;
+}
+
+void JsonGenerator::publishBroker(const char* topic, const char* payload)
+{
+  // pubBroker.publish(topic, payload);
 }
