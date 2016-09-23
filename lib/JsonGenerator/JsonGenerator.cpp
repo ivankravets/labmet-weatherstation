@@ -17,17 +17,16 @@ void JsonGenerator::prepareData()
   newRoot["bmp180_alt"] = collectedData.bmp180Alt;
   newRoot["bmp180_press"] = collectedData.bmp180Press;
   newRoot["ds18b20_temp"] = collectedData.ds18b20Temp;
-  newRoot["dht22_temp"] = collectedData.dht22Temp;
-  newRoot["dht22_humid"] = collectedData.dht22Humid;
+  // newRoot["dht22_temp"] = collectedData.dht22Temp;
+  // newRoot["dht22_humid"] = collectedData.dht22Humid;
 }
 
-bool JsonGenerator::writeResponseToSerial()
+String JsonGenerator::writeResponseToSerial()
 {
   this->prepareData();
-  this->newRoot.prettyPrintTo(Serial);
-  this->newRoot.prettyPrintTo(payload, sizeof(payload));
-  String payloadMsg(payload);
-  return payloadMsg;
+  char buffer[120];
+  this->newRoot.printTo(buffer, sizeof(buffer));
+  return buffer;
 }
 
 void JsonGenerator::publishBroker(const char* topic, const char* payload)

@@ -18,8 +18,8 @@ struct climate_data_t
   float_t bmp180Alt = NAN;
   float_t bmp180Press = NAN;
   float_t ds18b20Temp = NAN;
-  float_t dht22Temp = NAN;
-  float_t dht22Humid = NAN;
+  // float_t dht22Temp = NAN;
+  // float_t dht22Humid = NAN;
 };
 
 class JsonGenerator
@@ -28,7 +28,7 @@ class JsonGenerator
 public:
   JsonGenerator(climate_data_t &data);
   void prepareData();
-  bool writeResponseToSerial();
+  String writeResponseToSerial();
   void publishBroker(const char* topic, const char* payload);
   ~JsonGenerator();
 private:

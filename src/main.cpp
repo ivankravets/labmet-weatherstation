@@ -54,7 +54,7 @@ WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 PubSubClient net(wifiClient);
 
-BrokerClient mqtt(net, "192.168.1.138", 1883, 1);
+BrokerClient mqtt(net, "192.168.1.125", 1883, 1);
 // -------------------------setup-------------------------------------------- //
 
  void setup()
@@ -74,7 +74,7 @@ BrokerClient mqtt(net, "192.168.1.138", 1883, 1);
 
  void loop()
  {
- char strr[2]= {0, 'A'};
+ // char strr[2]= {0, 'A'};
   climate_data_t collectedData;
 
   // rtc.dateTimeNow().toCharArray(collectedData.date, 20);
@@ -82,8 +82,8 @@ BrokerClient mqtt(net, "192.168.1.138", 1883, 1);
   collectedData.bmp180Alt =34;
   collectedData.bmp180Press =56;
   collectedData.ds18b20Temp =78;
-  collectedData.dht22Temp =910;
-  collectedData.dht22Humid =1112;
+  // collectedData.dht22Temp =91;
+  // collectedData.dht22Humid =11;
   //
   // rtc.dateTimeNow().toCharArray(collectedData.date, 20);
   // collectedData.bmp180Temp = pressureSensor.getTemperature();
@@ -94,17 +94,17 @@ BrokerClient mqtt(net, "192.168.1.138", 1883, 1);
   // collectedData.dht22Humid = climate.readHum();
   //
   JsonGenerator *json = new JsonGenerator(collectedData);
-  // char payload = json->writeResponseToSerial();
-  char payload = {1};
-  // char* pChar = &payload;
-  char* pChar ="hahaha";
-  //
-  // delete json;
-  // climate.save();
+  //String payload = "hauhuhauahuahuahauhauhauhahaauh";
+  String payload = json->writeResponseToSerial();
+  Serial.println(payload);
+  delete json;
+  climate.save();
   net.loop();
-  mqtt.sendMsg("msg", 1, pChar);
+  mqtt.sendMsg("msg", payload);
    delay(1000);
-  wifi.checkWiFi();
+  // wifi.checkWiFi();
+
+  delay(500);
   }
 
 // -------------------------end of main-------------------------------------- //

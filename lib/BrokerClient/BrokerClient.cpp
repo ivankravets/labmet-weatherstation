@@ -78,7 +78,8 @@ void BrokerClient::sendMsg(String topic,  String str)
       }
       const char* json = str.c_str();
       const char* topicJson = topic.c_str();
-
+      Serial.println("json");
+      Serial.println(json);
     BrokerCl.publish(topicJson, json);
   }
   else {
