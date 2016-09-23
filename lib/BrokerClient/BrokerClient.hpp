@@ -30,7 +30,7 @@ public:
   void connectBroker();
   String printMAC();
   String macToStr(const uint8_t* mac);
-  void sendMsg(char* topic, int length, char* str);
+  void sendMsg(String topic, String str);
 
 private:
   PubSubClient BrokerCl;

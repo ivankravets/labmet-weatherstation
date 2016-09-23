@@ -66,21 +66,20 @@ void BrokerClient::connectBroker()
 }
 // -------------------------------------------------------------------------- //
 
-void BrokerClient::sendMsg(char* topic, int length, char* str)
+void BrokerClient::sendMsg(String topic,  String str)
 {
    BrokerCl.loop();
 
   if(checkBroker())
   {
-    // strncat(topic, str, length);
-
-    snprintf (topic, length, "%s", str);
-
     if (debuging){
         Serial.print("Publish message: ");
-        Serial.println(topic);
+        Serial.println(str);
       }
-    BrokerCl.publish("%s", topic);
+      const char* json = str.c_str();
+      const char* topicJson = topic.c_str();
+
+    BrokerCl.publish(topicJson, json);
   }
   else {
     if (debuging){
