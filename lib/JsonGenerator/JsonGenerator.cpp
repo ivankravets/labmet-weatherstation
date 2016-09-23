@@ -26,7 +26,8 @@ bool JsonGenerator::writeResponseToSerial()
   this->prepareData();
   this->newRoot.prettyPrintTo(Serial);
   this->newRoot.prettyPrintTo(payload, sizeof(payload));
-  return payload;
+  String payloadMsg(payload);
+  return payloadMsg;
 }
 
 void JsonGenerator::publishBroker(const char* topic, const char* payload)
