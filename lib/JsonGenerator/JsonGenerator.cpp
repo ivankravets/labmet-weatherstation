@@ -19,12 +19,13 @@ void JsonGenerator::prepareData()
   newRoot["ds18b20_temp"] = collectedData.ds18b20Temp;
   newRoot["dht22_temp"] = collectedData.dht22Temp;
   newRoot["dht22_humid"] = collectedData.dht22Humid;
+  newRoot["bh1750_illuminance"] = collectedData.illuminance;
 }
 
 String JsonGenerator::writeResponseToSerial()
 {
   this->prepareData();
-  char buffer[161];
+  char buffer[256];
   this->newRoot.printTo(buffer, sizeof(buffer));
   return buffer;
 }
