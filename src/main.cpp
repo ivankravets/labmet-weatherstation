@@ -14,7 +14,8 @@ Created by: the <lab804> Team
 #include "JsonGenerator.hpp"
 #include "DS18b20.hpp"
 #include "WiFiConn.hpp"
-#include "BH1750.hpp"
+#include "BrokerClient.hpp"
+
 // -------------------------defines------------------------------------------ //
 
 #define LCD_ADDR 0X27
@@ -30,8 +31,6 @@ const char* ssid = "LAB804";
 const char* password = "l4b804!@";
 
 // -------------------------Object Instatiating------------------------------ //
-
-
 
 DHT dht22(DHT_PIN, DHT22);
 LiquidCrystal_I2C lcd(LCD_ADDR, 16, 2);
@@ -51,9 +50,10 @@ PressureSensor pressureSensor(bmp180, 1000);
 DS18b20 ds18b20(ds18b20Sensor, 500);
 
 WiFiConn wifi(ssid, password);
+WiFiClient wifiClient;
+PubSubClient net(wifiClient);
 
-BH1750 bh1750;
-
+BrokerClient mqtt(net, "192.168.1.167", 1883);
 // -------------------------setup-------------------------------------------- //
 
  void setup()
@@ -65,14 +65,18 @@ BH1750 bh1750;
    delay(500);
    wifi.begin();
    ds18b20.begin();
-   bh1750.begin();
+
+   delay(500);
+
+   mqtt.begin();
+  //  ds18b20.begin();
  }
 
 // -------------------------loop--------------------------------------------- //
 
  void loop()
  {
-  Serial.println(bh1750.readIlluminanceLevel());
+ // char strr[2]= {0, 'A'};
   climate_data_t collectedData;
 
   rtc.dateTimeNow().toCharArray(collectedData.date, 20);
@@ -84,12 +88,18 @@ BH1750 bh1750;
   collectedData.dht22Humid = climate.readHum();
 
   JsonGenerator *json = new JsonGenerator(collectedData);
-  json->writeResponseToSerial();
-
+  String payload = json->writeResponseToSerial();
+  Serial.println(payload);
   delete json;
+
   climate.save();
-   delay(1000);
+  net.loop();
+  mqtt.sendMsg("msg", payload);
+  delay(2000);
   wifi.checkWiFi();
+
+
+  delay(500);
   }
 
 // -------------------------end of main-------------------------------------- //

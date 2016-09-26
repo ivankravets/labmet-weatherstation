@@ -2,6 +2,8 @@
 #define JSONGENERATOR_HPP
 
 #include "ArduinoJson.h"
+#include <PubSubClient.h>
+
 
 #if ARDUINO >= 100
  #include "Arduino.h"
@@ -26,12 +28,14 @@ class JsonGenerator
 public:
   JsonGenerator(climate_data_t &data);
   void prepareData();
-  void writeResponseToSerial();
+  String writeResponseToSerial();
+  void publishBroker(const char* topic, const char* payload);
   ~JsonGenerator();
 private:
   climate_data_t &collectedData;
   StaticJsonBuffer<120> jsonbuffer;
   JsonObject &newRoot;
+  char* payload;
 };
 
 #endif
