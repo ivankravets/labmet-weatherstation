@@ -16,6 +16,8 @@ Created by: the <lab804> Team
 #include "WiFiConn.hpp"
 #include "BrokerClient.hpp"
 #include "BH1750.hpp"
+#include "SoilMoisture.hpp"
+
 // -------------------------defines------------------------------------------ //
 
 #define LCD_ADDR 0X27
@@ -24,6 +26,7 @@ Created by: the <lab804> Team
 #define GREEN_LED D7
 #define RED_LED D8
 #define ONE_WIRE_BUS D3
+#define MOISTURE_PIN A0
 
 // -------------------------consts------------------------------------------- //
 
@@ -51,11 +54,14 @@ DS18b20 ds18b20(ds18b20Sensor, 500);
 
 BH1750 bh1750;
 
+SoilMoisture sh(MOISTURE_PIN);
+
 WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
 BrokerClient mqtt(net, "192.168.1.167", 1883);
+
 // -------------------------setup-------------------------------------------- //
 
  void setup()
@@ -64,11 +70,11 @@ BrokerClient mqtt(net, "192.168.1.167", 1883);
    delay(500);
    pressureSensor.begin();
    bh1750.begin();
+   sh.begin();
    climate.begin();
    delay(500);
    wifi.begin();
    ds18b20.begin();
-
    delay(500);
 
    mqtt.begin();
@@ -100,8 +106,9 @@ BrokerClient mqtt(net, "192.168.1.167", 1883);
   delay(2000);
   wifi.checkWiFi();
 
-
+  sh.soilHumidityPercent(360, 981);
   delay(500);
+
   }
 
 // -------------------------end of main-------------------------------------- //
