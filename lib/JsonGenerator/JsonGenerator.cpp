@@ -28,8 +28,3 @@ String JsonGenerator::writeResponseToSerial()
   this->newRoot.printTo(buffer, sizeof(buffer));
   return buffer;
 }
-
-void JsonGenerator::publishBroker(const char* topic, const char* payload)
-{
-  // pubBroker.publish(topic, payload);
-}

@@ -29,7 +29,6 @@ public:
   JsonGenerator(climate_data_t &data);
   void prepareData();
   String writeResponseToSerial();
-  void publishBroker(const char* topic, const char* payload);
   ~JsonGenerator();
 private:
   climate_data_t &collectedData;
