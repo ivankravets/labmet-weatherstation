@@ -15,6 +15,8 @@ Created by: the <lab804> Team
 #include "DS18b20.hpp"
 #include "WiFiConn.hpp"
 #include "BrokerClient.hpp"
+#include "BH1750.hpp"
+#include "SoilHumidity.hpp"
 
 // -------------------------defines------------------------------------------ //
 
@@ -53,8 +55,9 @@ WiFiConn wifi(ssid, password);
 
 WiFiClient wifiClient;
 PubSubClient net(wifiClient);
-
 BrokerClient mqtt(net, "192.168.1.125", 1883, 1);
+
+SoilHumidity sh;
 // -------------------------setup-------------------------------------------- //
 
  void setup()
@@ -68,20 +71,22 @@ BrokerClient mqtt(net, "192.168.1.125", 1883, 1);
    delay (500);
    mqtt.begin();
   //  ds18b20.begin();
+
  }
 
 // -------------------------loop--------------------------------------------- //
 
  void loop()
  {
- // char strr[2]= {0, 'A'};
-  climate_data_t collectedData;
+  // Serial.println(bh1750.readIlluminanceLevel())
+
+  // climate_data_t collectedData;
 
   // rtc.dateTimeNow().toCharArray(collectedData.date, 20);
-  collectedData.bmp180Temp = 12;
-  collectedData.bmp180Alt =34;
-  collectedData.bmp180Press =56;
-  collectedData.ds18b20Temp =78;
+  // collectedData.bmp180Temp = 12;
+  // collectedData.bmp180Alt =34;
+  // collectedData.bmp180Press =56;
+  // collectedData.ds18b20Temp =78;
   // collectedData.dht22Temp =91;
   // collectedData.dht22Humid =11;
   //
@@ -93,18 +98,19 @@ BrokerClient mqtt(net, "192.168.1.125", 1883, 1);
   // collectedData.dht22Temp = climate.readTemp();
   // collectedData.dht22Humid = climate.readHum();
   //
-  JsonGenerator *json = new JsonGenerator(collectedData);
-  //String payload = "hauhuhauahuahuahauhauhauhahaauh";
-  String payload = json->writeResponseToSerial();
-  Serial.println(payload);
-  delete json;
-  climate.save();
-  net.loop();
-  mqtt.sendMsg("msg", payload);
-   delay(1000);
+  // JsonGenerator *json = new JsonGenerator(collectedData);
+  // //String payload = "hauhuhauahuahuahauhauhauhahaauh";
+  // String payload = json->writeResponseToSerial();
+  // Serial.println(payload);
+  // delete json;
+  // climate.save();
+  // net.loop();
+  // mqtt.sendMsg("msg", payload);
+  //  delay(1000);
+  sh.getSoilHumidity();
   // wifi.checkWiFi();
-
   delay(500);
+
   }
 
 // -------------------------end of main-------------------------------------- //
