@@ -60,7 +60,7 @@ WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
-BrokerClient mqtt(net, "192.168.1.165", 1883);
+BrokerClient mqtt(net, "joao-All-Series", 1883);
 
 // -------------------------setup-------------------------------------------- //
 
