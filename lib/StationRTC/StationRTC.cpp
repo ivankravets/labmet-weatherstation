@@ -46,13 +46,15 @@ String StationRtc::dateTimeNow()
   }
 
   DateTime timeStamp = rtc.now();
-  String fmtDateTime = this->formatDateTime(timeStamp.day()) + "/";
-  fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.month()) + "/";
-  fmtDateTime = fmtDateTime + timeStamp.year() + " ";
+  String fmtDateTime = String(timeStamp.year()) + "-";
+  fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.month()) + "-";
+  fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.day()) + "T";
+
   fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.hour()) + ":";
   fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.minute()) + ":";
   fmtDateTime = fmtDateTime + this->formatDateTime(timeStamp.second());
   return fmtDateTime;
 }
+
 
 // -----------------------------------------------//

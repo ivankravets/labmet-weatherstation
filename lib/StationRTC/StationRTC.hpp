@@ -19,6 +19,9 @@ Created by: Joao Trevizoli Esteves
  #include "Arduino.h"
 #endif
 #include <RTClib.h>
+#include "Format.h"
+
+// -------------------------Class Interface---------------------------------- //
 
 class StationRtc
 {
