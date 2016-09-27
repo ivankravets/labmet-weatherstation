@@ -60,7 +60,7 @@ WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
-BrokerClient mqtt(net, "192.168.1.167", 1883);
+BrokerClient mqtt(net, "192.168.1.165", 1883);
 
 // -------------------------setup-------------------------------------------- //
 
@@ -94,6 +94,7 @@ BrokerClient mqtt(net, "192.168.1.167", 1883);
   collectedData.dht22Temp = climate.readTemp();
   collectedData.dht22Humid = climate.readHum();
   collectedData.illuminance = bh1750.readIlluminanceLevel();
+  collectedData.soilMoisture = sh.soilHumidityPercent(360, 981);
 
   JsonGenerator *json = new JsonGenerator(collectedData);
   String payload = json->writeResponseToSerial();
@@ -106,7 +107,7 @@ BrokerClient mqtt(net, "192.168.1.167", 1883);
   delay(2000);
   wifi.checkWiFi();
 
-  sh.soilHumidityPercent(360, 981);
+
   delay(500);
 
   }

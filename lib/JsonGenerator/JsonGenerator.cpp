@@ -20,6 +20,7 @@ void JsonGenerator::prepareData()
   newRoot["dht22_temp"] = collectedData.dht22Temp;
   newRoot["dht22_humid"] = collectedData.dht22Humid;
   newRoot["bh1750_illuminance"] = collectedData.illuminance;
+  newRoot["analog_soil_moisture"] = collectedData.soilMoisture;
 }
 
 String JsonGenerator::writeResponseToSerial()

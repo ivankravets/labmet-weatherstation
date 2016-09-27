@@ -21,6 +21,7 @@ struct climate_data_t
   float_t dht22Temp = NAN;
   float_t dht22Humid = NAN;
   uint16_t illuminance = NAN;
+  float_t soilMoisture = NAN;
 };
 
 class JsonGenerator
@@ -33,7 +34,7 @@ public:
   ~JsonGenerator();
 private:
   climate_data_t &collectedData;
-  StaticJsonBuffer<136> jsonbuffer;
+  StaticJsonBuffer<152> jsonbuffer;
   JsonObject &newRoot;
   char* payload;
 };
