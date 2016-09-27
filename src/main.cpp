@@ -103,12 +103,12 @@ BrokerClient mqtt(net, "joao-All-Series", 1883);
 
   climate.save();
   net.loop();
-  mqtt.sendMsg("msg", payload);
-  delay(2000);
+  mqtt.sendMsg("weather_data", payload);
+  // delay(2000);
   wifi.checkWiFi();
 
 
-  delay(500);
+  delay(100);
 
   }
 
