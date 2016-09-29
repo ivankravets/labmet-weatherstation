@@ -40,7 +40,8 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length);
 class BrokerClient
 {
 public:
-  BrokerClient(PubSubClient broker, const char* HOST, int port);
+  BrokerClient(PubSubClient broker, const char* HOST, int port,
+    const char* brokerSsid, const char* brokerPassword);
   void begin();
   bool checkBroker();
   void connectBroker(uint16_t delayTime = 5000);

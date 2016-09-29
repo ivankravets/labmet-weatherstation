@@ -30,9 +30,10 @@ Created by: the <lab804> Team
 
 // -------------------------consts------------------------------------------- //
 
-const char* ssid = "LAB804";
-const char* password = "l4b804!@";
-
+const char* ssid = "Pi3-AP";
+const char* password = "raspberry";
+const char* ssidBroker= "NodeMCU";
+const char* passwordBroker = "123456";
 // -------------------------Object Instatiating------------------------------ //
 
 DHT dht22(DHT_PIN, DHT22);
@@ -60,7 +61,7 @@ WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
-BrokerClient mqtt(net, "joao-All-Series", 1883);
+BrokerClient mqtt(net, "raspberrypi", 1883, ssidBroker, passwordBroker);
 
 // -------------------------setup-------------------------------------------- //
 
@@ -104,7 +105,7 @@ BrokerClient mqtt(net, "joao-All-Series", 1883);
   climate.save();
   net.loop();
   mqtt.sendMsg("weather_data", payload);
-  // delay(2000);
+
   wifi.checkWiFi();
 
 

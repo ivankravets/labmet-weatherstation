@@ -34,11 +34,12 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 
 // -------------------------Init method-------------------------------------- //
 
-BrokerClient::BrokerClient(PubSubClient broker, const char* HOST, int port):
+BrokerClient::BrokerClient(PubSubClient broker, const char* HOST,
+  int port, const char* brokerSsid, const char* brokerPassword):
 BrokerCl(broker)
 {
-  this->ssidBroker= "NodeMCU";
-  this->passwordBroker = "123456";
+  this->ssidBroker= brokerSsid;
+  this->passwordBroker = brokerPassword;
   this->brokermqtt = HOST;
   this->brokerport = port;
 }
