@@ -50,15 +50,14 @@ O funcionamento, pode ser exemplificado na Ilustração 1.
 
 
 #### Ilustração 1####
-![demonstrativo_2_labmet](https://cloud.githubusercontent.com/assets/22622042/19085120/902669d8-8a3f-11e6-85ad-532257b41262.png)
+![demonstrativo_1_labmet](https://cloud.githubusercontent.com/assets/22622042/19085103/771c335a-8a3f-11e6-8490-23a1b3c566d1.png)
 
 
 Neste exemplo, utilizamos apenas um NodeMCU e um Raspberry. Porém, pode-se adicionar vários NodeMCU em apenas um Raspberry, de forma que se tem várias estações em diferentes lugares, utilizando apenas um gerenciador, como podemos observar na Ilustração 2.
 
 
 #### Ilustração 2####
-![demonstrativo_1_labmet](https://cloud.githubusercontent.com/assets/22622042/19085103/771c335a-8a3f-11e6-8490-23a1b3c566d1.png)
-
+![demonstrativo_2_labmet](https://cloud.githubusercontent.com/assets/22622042/19085120/902669d8-8a3f-11e6-85ad-532257b41262.png)
 
  Esta condição só é possível se as estações estiverem no perímetro de alcance da rede WIFi do gerenciador, sendo imprescindível a conexão para seu funcionamento correto.
 
