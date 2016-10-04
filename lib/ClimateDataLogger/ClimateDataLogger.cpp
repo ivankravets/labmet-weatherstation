@@ -11,6 +11,8 @@ Implementation of the climate datalogger object
 
 #include "ClimateDataLogger.hpp"
 
+// -------------------------Init method-------------------------------------- //
+
 ClimateDataLogger::ClimateDataLogger(DHT& dht22,
   LiquidCrystal_I2C& lcdS, StationRtc &rtc,
   uint8_t csPin, uint8_t greenLed, uint8_t redLed):
@@ -22,7 +24,7 @@ ClimateDataLogger::ClimateDataLogger(DHT& dht22,
 
 }
 
-// -----------------------------------------------//
+// -------------------------------Public Methods------------------------------//
 
 void ClimateDataLogger::begin()
 {
@@ -36,7 +38,7 @@ void ClimateDataLogger::begin()
 }
 
 
-// -----------------------------------------------//
+// ---------------------------------------------------------------------------//
 
 void ClimateDataLogger::save()
 {
@@ -49,7 +51,7 @@ void ClimateDataLogger::save()
   }
 }
 
-// -----------------------------------------------//
+// ---------------------------------------------------------------------------//
 
 float ClimateDataLogger::readTemp()
 {
@@ -69,7 +71,7 @@ float ClimateDataLogger::readTemp()
   return temp;
 }
 
-// -----------------------------------------------//
+// ----------------------------------------------------------------------------//
 
 float ClimateDataLogger::readHum()
 {
@@ -89,14 +91,14 @@ float ClimateDataLogger::readHum()
   return humid;
 }
 
-// -----------------------------------------------//
+// ---------------------------------------------------------------------------//
 
 void ClimateDataLogger::blockedLed()
 {
   digitalWrite(ledPins[0], LOW);
   digitalWrite(ledPins[1], HIGH);
 }
-// -----------------------------------------------//
+// ----------------------------------------------------------------------------//
 
 void ClimateDataLogger::savingLed()
 {
@@ -104,4 +106,4 @@ void ClimateDataLogger::savingLed()
   digitalWrite(ledPins[1], LOW);
 }
 
-// -----------------------------------------------//
+// ----------------------------------------------------------------------------//

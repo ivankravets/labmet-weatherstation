@@ -5,11 +5,12 @@ collectedData(data), newRoot(jsonbuffer.createObject())
 {
 
 }
-// -------------------------------------------------------------------------- //
+// -------------------------Init method-------------------------------------- //
 JsonGenerator::~JsonGenerator()
 {
 }
-// -------------------------------------------------------------------------- //
+
+// ----------------------------Public methods--------------------------------- //
 
 void JsonGenerator::prepareData()
 {
@@ -23,7 +24,9 @@ void JsonGenerator::prepareData()
   newRoot["bh1750_illuminance"] = collectedData.illuminance;
   newRoot["analog_soil_moisture"] = collectedData.soilMoisture;
 }
+
 // -------------------------------------------------------------------------- //
+
 String JsonGenerator::writeResponseToSerial()
 {
   this->prepareData();
@@ -31,3 +34,4 @@ String JsonGenerator::writeResponseToSerial()
   this->newRoot.printTo(buffer, sizeof(buffer));
   return buffer;
 }
+// ---------------------------------end--------------------------------------- //

@@ -12,28 +12,30 @@ Created by: Joao Trevizoli Esteves
 
 #ifndef PRESSURESENSOR_HPP
 #define PRESSURESENSOR_HPP
-// ----------------Debug Directives---------------- //
+// --------------------------------Debug Directives--------------------------- //
 
 #define BMP_DEBUG 1
 
-// ----------------Error messages------------------ //
+// --------------------------------Error messages----------------------------- //
 
 #define ERROR_BMP180_START "can't begin the bmp180 sensor"
 #define ERROR_OVERSAMPLIMP "The parameter oversampling must be with a integer between 0 and 3"
 #define ERROR_BMP180_TEMP_START "Error while starting the temperature sensor of the bmp180 module"
 #define ERROR_BMP180_PRESSURE_START "Error while starting the pressure sensor of the bmp180 module"
 
-// ----------------Error codes-------------------- //
+// -------------------------------Error codes--------------------------------- //
 
 #define ERROR_BMP180_START_CODE 31
 #define ERROR_OVERSAMPLIMP_CODE 32
 #define ERROR_BMP180_TEMP_START_CODE 33
 #define ERROR_BMP180_PRESSURE_START_CODE 34
 
-// ----------------------------------------------- //
+// --------------------------------------------------------------------------- //
 
 #include <SFE_BMP180.h>
 #include "Format.h"
+
+// -------------------------Class Interface---------------------------------- /
 
 class PressureSensor
 {

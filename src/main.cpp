@@ -28,6 +28,10 @@ Created by: the <lab804> Team
 #define ONE_WIRE_BUS D3
 #define MOISTURE_PIN A0
 
+// -------------------------Debug Directives--------------------------------- //
+
+#define MAIN_DEBUG 1
+
 // -------------------------consts------------------------------------------- //
 
 const char* ssid = "Pi3-AP";
@@ -79,7 +83,6 @@ BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
    wifi.begin();
    ds18b20.begin();
    delay(500);
-
    mqtt.begin();
  }
 
@@ -101,7 +104,9 @@ BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
 
   JsonGenerator *json = new JsonGenerator(collectedData);
   String payload = json->writeResponseToSerial();
+  #if MAIN_DEBUG == 1
   Serial.println(payload);
+  #endif
   delete json;
 
   climate.save();
