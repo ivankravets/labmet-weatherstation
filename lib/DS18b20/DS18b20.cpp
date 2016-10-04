@@ -14,11 +14,9 @@ Created by: Barbara Panosso
 
 // -------------------------Init method-------------------------------------- //
 
-DS18b20::DS18b20(DallasTemperature &dallasAdd,  uint32_t updateInterval,
-   bool debuging):
+DS18b20::DS18b20(DallasTemperature &dallasAdd,  uint32_t updateInterval):
 sensors(dallasAdd)
 {
-  this->debuging = debuging;
   this->previousUpdate = 0;
   this->updateInterval = updateInterval;
   this->temperature = NAN;
@@ -29,8 +27,7 @@ void DS18b20::begin()
 {
   this->sensors.begin();
   this->checkSensor();
-  if (debuging)
-    this->searchForSensors();
+  this->searchForSensors();
 }
 
 // -------------------------------------------------------------------------- //
@@ -45,26 +42,36 @@ float DS18b20::getTemperature()
 
 void DS18b20::searchForSensors()
 {
+  #if BS18b20_DEBUG == 1
   Serial.println("Searching for One Wire sensors...");
+  #endif
   if (this->checkSensor())
   {
     uint8_t numberOfSensors = this->sensors.getDeviceCount();
     if (numberOfSensors > 1)
     {
+      #if BS18b20_DEBUG == 1
       Serial.print(format("It were found %d One Wire sensors\n",
        numberOfSensors));
+       #endif
     }
     else
     {
+      #if BS18b20_DEBUG == 1
       Serial.print("It were found 1 One Wire sensor\n");
+      #endif
     }
+    #if BS18b20_DEBUG == 1
       Serial.print(format("Sensor: "));
       this->printAddress(this->thermometerAddr);
       Serial.print("\n\n");
+      #endif
   }
   else
   {
+    #if BS18b20_DEBUG == 1
     Serial.println("It was't found any One Wire sensors");
+    #endif
   }
 }
 
@@ -85,8 +92,9 @@ bool DS18b20::checkSensor()
 {
     if (!this->sensors.getAddress(this->thermometerAddr, this->one_wire_b))
     {
-      if (this->debuging)
-        this->printErrors(ERROR_DS18B20_NOT_FOUND);
+      #if BS18b20_DEBUG == 1
+        Serial.println(ERROR_DS18B20_NOT_FOUND);
+        #endif
       this->begin();
 
       return false;
@@ -100,8 +108,9 @@ bool DS18b20::setTemperature()
 {
   if(!checkSensor())
   {
-    if(this->debuging)
-      this->printErrors(ERROR_DS18B20_START);
+    #if BS18b20_DEBUG == 1
+      Serial.println(ERROR_DS18B20_START);
+      #endif
     return false;
   }
   this->sensors.requestTemperatures();
@@ -109,8 +118,9 @@ bool DS18b20::setTemperature()
 
   if(this->temperature == -127)
   {
-    if(debuging)
-      this->printErrors(ERROR_DS18B20_ABSOLUTE_NEGATIVE_TEMP);
+    #if BS18b20_DEBUG == 1
+      Serial.println(ERROR_DS18B20_ABSOLUTE_NEGATIVE_TEMP);
+      #endif
     return false;
   }
 

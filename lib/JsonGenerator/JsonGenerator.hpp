@@ -1,15 +1,20 @@
 #ifndef JSONGENERATOR_HPP
 #define JSONGENERATOR_HPP
 
+// -------------------------------------------------------------------------- //
+
 #include "ArduinoJson.h"
 #include <PubSubClient.h>
 
+// -------------------------------------------------------------------------- //
 
 #if ARDUINO >= 100
  #include "Arduino.h"
 #else
  #include "WProgram.h"
 #endif
+
+// -------------------------------------------------------------------------- //
 
 struct climate_data_t
 {
@@ -23,6 +28,8 @@ struct climate_data_t
   uint16_t illuminance = NAN;
   float_t soilMoisture = NAN;
 };
+
+// -------------------------------------------------------------------------- //
 
 class JsonGenerator
 {

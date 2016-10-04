@@ -13,7 +13,7 @@ Created by: Joao Trevizoli Esteves
 #ifndef STATIONRTC_HPP
 #define  STATIONRTC_HPP
 
-// -----------------------------------------------//
+// ---------------------------------------------------------------------------//
 
 #if ARDUINO >= 100
  #include "Arduino.h"

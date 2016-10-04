@@ -15,7 +15,7 @@ Created by: Joao Trevizoli Esteves
 // -------------------------Init method-------------------------------------- //
 
 PressureSensor::PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval,
-  int oversampling, double seaPressure, bool errorPrinting):
+  int oversampling, double seaPressure):
 bmp180(bmp180Ptr)
 {
 
@@ -26,7 +26,6 @@ bmp180(bmp180Ptr)
   this->updateInterval = updateInterval;
   this->oversampling = oversampling;
   this->seaPressure = seaPressure;
-  this->errorPrinting = errorPrinting;
 }
 
 // -------------------------Public methods----------------------------------- //
@@ -35,9 +34,9 @@ void PressureSensor::begin()
 {
   while (!this->bmp180.begin())
   {
-    if(this->errorPrinting)
+    #if BMP_DEBUG == 1
       Serial.println(format(ERROR_BMP180_START));
-
+      #endif
 
     delay(100);
   }
@@ -57,8 +56,9 @@ float  PressureSensor::getPressure()
 {
     if (0 > this->oversampling || this->oversampling > 3)
     {
-      if(this->errorPrinting)
+      #if BMP_DEBUG == 1
         this->printErrors(ERROR_OVERSAMPLIMP);
+        #endif
       return false;
     }
 
@@ -98,8 +98,9 @@ bool PressureSensor::setTemperature()
     status = this->bmp180.startTemperature();
     if (status == 0)
     {
-      if(this->errorPrinting)
-        this->printErrors(ERROR_BMP180_TEMP_START);
+      #if BMP_DEBUG == 1
+        Serial.println(ERROR_BMP180_TEMP_START);
+        #endif
       return false;
     }
     delay(status);
@@ -113,8 +114,9 @@ bool PressureSensor::setPressure()
   status = this->bmp180.startPressure(this->oversampling);
   if (status == 0)
   {
-    if(this->errorPrinting)
-      this->printErrors(ERROR_BMP180_PRESSURE_START);
+    #if BMP_DEBUG == 1
+      Serial.println(ERROR_BMP180_PRESSURE_START);
+      #endif
     return false;
   }
 

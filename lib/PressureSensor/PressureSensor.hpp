@@ -12,6 +12,9 @@ Created by: Joao Trevizoli Esteves
 
 #ifndef PRESSURESENSOR_HPP
 #define PRESSURESENSOR_HPP
+// ----------------Debug Directives---------------- //
+
+#define BMP_DEBUG 1
 
 // ----------------Error messages------------------ //
 
@@ -36,7 +39,7 @@ class PressureSensor
 {
 public:
 PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval,
-  int oversampling = 2, double seaPressure = 1013.25, bool errorPrinting = true);
+  int oversampling = 2, double seaPressure = 1013.25);
 void begin();
 float getTemperature();
 float getPressure();
@@ -52,7 +55,6 @@ void update();
 char status;
 uint32_t previousUpdate;
 uint32_t updateInterval;
-bool errorPrinting;
 int oversampling;
 double seaPressure;
 double temperature;

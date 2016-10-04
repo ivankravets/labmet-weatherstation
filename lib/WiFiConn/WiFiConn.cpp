@@ -17,7 +17,7 @@ Created by: Joao Trevizoli Esteves
 
 // -------------------------Init method-------------------------------------- //
 
-WiFiConn::WiFiConn(const char* SSID, const char* Password, bool debuging)
+WiFiConn::WiFiConn(const char* SSID, const char* Password)
 {
   this->ssid = SSID;
   this->password = Password;
@@ -58,11 +58,10 @@ void WiFiConn::localIpChange()
   if (clientLocalIp != WiFi.localIP())
   {
     clientLocalIp = WiFi.localIP();
-    if (debuging)
-    {
+    #if WF_DEBUG == 1
       Serial.print("The local IP has changed to ");
       Serial.println(clientLocalIp);
-    }
+    #endif
   }
 }
 
@@ -70,17 +69,19 @@ void WiFiConn::localIpChange()
 
 void WiFiConn::connect()
 {
-  if(debuging)
-  {
+  #if WH_DEBUG == 1
     printformat("Trying to connect to %s\n", this->ssid);
+    #endif
+
     if (WiFi.status() == WL_CONNECTED)
     {
       clientLocalIp = WiFi.localIP();
+      #if WF_DEBUG == 1
       Serial.print("WiFi connected!\n IP: ");
       Serial.println(clientLocalIp);
+      #endif
       return;
     }
-  }
 
   if (WiFi.status() == WL_CONNECTED)
       clientLocalIp = WiFi.localIP();
@@ -91,12 +92,16 @@ void WiFiConn::connect()
 
   if (WiFi.status() == WL_CONNECTED && this->debuging)
   {
+    #if WF_DEBUG == 1
     Serial.print("WiFi connected!\n IP: ");
     Serial.println(WiFi.localIP());
+    #endif
   }
   else if (WiFi.status() != WL_CONNECTED)
   {
+    #if WF_DEBUG == 1
     printformat("Can't connect to %s\n", this->ssid);
+    #endif
   }
 }
 

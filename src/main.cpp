@@ -109,8 +109,6 @@ BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
   mqtt.sendMsg("weather_data", payload);
 
   wifi.checkWiFi();
-
-
   delay(100);
 
   }
