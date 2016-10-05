@@ -1,6 +1,6 @@
 # LabMet - Estação meteorológica com NodeMCU e Raspberry ###
 
-A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU captura dados climáticos a partir de sensores e as envia para o Raspberry, o qual  gerencia o recebimento e envio destes dados para o servidor. O servidor, por sua vez, trata os dados coletados e alimenta o site, aplicativo e banco de dados com as informações pertinentes. Desta forma, pode-se estipular a produtividade da cultura em questão.
+A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU captura dados climáticos a partir de sensores e as envia para o Raspberry, o qual  gerencia o recebimento e envio destes dados para o servidor. O servidor, por sua vez, trata os dados coletados e alimenta o site, aplicativo e banco de dados com as informações pertinentes. Desta forma, pode-se estipular a produtividade e auxiliar a tomada de decisões na manutenção da cultura em questão.
 
 ## Lista de componentes: ##
 
