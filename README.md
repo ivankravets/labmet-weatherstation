@@ -1,8 +1,10 @@
-# LabMet - Estação meteorológica com NodeMCU e Raspberry ###
+ ![download](https://cloud.githubusercontent.com/assets/22622042/19200013/2f33d736-8c9d-11e6-9320-64f6caaec629.png)
+
+ # Estação meteorológica com NodeMCU e Raspberry #
 
 A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU captura dados climáticos a partir de sensores e as envia para o Raspberry, o qual  gerencia o recebimento e envio destes dados para o servidor. O servidor, por sua vez, trata os dados coletados e alimenta o site, aplicativo e banco de dados com as informações pertinentes. Desta forma, pode-se estipular a produtividade e auxiliar a tomada de decisões na manutenção da cultura em questão.
 
-## Lista de componentes: ##
+## Requisitos: ##
 
 
 * NodeMCU 1.0
@@ -15,7 +17,6 @@ A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU 
 * Soil Moisture Sensor
 * Display LCD 16x2p
 * Alimentação 5V
-
 
 ## Tecnologias:##
 
@@ -41,6 +42,11 @@ A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU 
 
 Não se preocupe com o gerenciamento da estação, pois o Raspberry já está configurado.
 
+## Circuito estação NodeMCU: ##
+
+
+![estacao_meteorologica](https://cloud.githubusercontent.com/assets/22622042/19199800/38aabf10-8c9c-11e6-8f90-4a901ef30993.png)
+
 
 ## Descrição do projeto##
 O NodeMCU é a estação meteorológica, o qual realiza a captura dos dados climáticos a partir de sensores adicionados a ele e, em seguida, os envia para o Raspberry por meio de conexão WiFi, utilizando autenticação de usuário e senha.
@@ -61,6 +67,16 @@ Neste exemplo, utilizamos apenas um NodeMCU e um Raspberry. Porém, pode-se adic
 
  Esta condição só é possível se as estações estiverem no perímetro de alcance da rede WIFi do gerenciador, sendo imprescindível a conexão para seu funcionamento correto.
 
+## Contribuidores##
+
+Criado e mantido por Lab804 
+
+#### Desenvolvedores:
+
+- João Trevizoli
+- Murilo Ijanc'
+
+#### Contribuições:
 
 
 
