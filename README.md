@@ -1,84 +1,61 @@
- ![download](https://cloud.githubusercontent.com/assets/22622042/19200013/2f33d736-8c9d-11e6-9320-64f6caaec629.png)
+ # Estação meteorológica com NodeMCU e Raspberry
 
- # Estação meteorológica com NodeMCU e Raspberry #
+The weather station is composed by one NodeMCU and one Raspberry. The NodeMCU captures weather data from sensors and sends them to Raspberry, which manages the receiving and sending of this data to the server. The server, for its part, treats the collected data, feed the website, application and database with the pertinent informations. In this way, the crop yield in question can be stipulated.
 
-A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU captura dados climáticos a partir de sensores e as envia para o Raspberry, o qual  gerencia o recebimento e envio destes dados para o servidor. O servidor, por sua vez, trata os dados coletados e alimenta o site, aplicativo e banco de dados com as informações pertinentes. Desta forma, pode-se estipular a produtividade e auxiliar a tomada de decisões na manutenção da cultura em questão.
+![download](https://cloud.githubusercontent.com/assets/22622042/19200013/2f33d736-8c9d-11e6-9320-64f6caaec629.png)
 
-## Requisitos: ##
+The NodeMCU is the weather station, which captures the weather data from the added sensors and send them to the Raspberry using an username and password authentication WiFi connection. The Raspberry receives the data through MQTT, a message exchange protocol between Publisher and Subscriber. The intermediary in the communication process is the broker, which also requires clients username and password authentication. The messages identification (received data) is performed by the broker by means of threads. The server is fed with the broker. The received data are treated and sent to the website, application and database. The crop yield is calculated using the received data from the server. The culture model used is AquaCrop,described by Doorenbos & Kassam (1994). The database utilized is MongoDB. It's operation can be exemplified in Figure 1.
+
+#### Figure 1
+![demonstrativo_1_labmet](https://cloud.githubusercontent.com/assets/22622042/19085103/771c335a-8a3f-11e6-8490-23a1b3c566d1.png)
 
 
-* NodeMCU 1.0
+In this example we use only one NodeMCU and one Raspberry. However, multiple NodeMCU can be added to one single Raspberry, so that you have several stations in different locations using a single manager, as observed in figure 2.
+
+
+#### Figure 2
+![demonstrativo_2_labmet](https://cloud.githubusercontent.com/assets/22622042/19085120/902669d8-8a3f-11e6-85ad-532257b41262.png)
+
+This condition is only possible if the stations are in the range of the manager's WiFi network, Which is indispensable for the components to work properly.
+
+## Getting Started
+#### Requirements
+* NodeMCU V1.0
 * Raspberry Pi3
-* BH1750  - Luminosidade
-* DS18B20 - Temperatura do Solo
-* BMP180 - Temperatura, Pressão, Altitude
-* RTC - Relógio
-* DHT22 - Temperatura e UR%
+* BH1750 - Luminosity
+* DS18B20 - Soil temperature
+* BMP180 - Temperature, Pressure, Altitude
+* RTC - Clock
+* DHT22 - Temperature and Relative Humidity%
 * Soil Moisture Sensor
-* Display LCD 16x2p
-* Alimentação 5V
+* Display LCD 16x2
+* 5V Power supply
 
-## Tecnologias:##
-
-
+#### Technologies
 * C/C++
 * Python
-* Framework de desenvolvimento Arduino
+* Arduino development framework
 * MongoDB
 * Flask
 * Socket IO
 * Mosquitto
-* Tecnologias Web (HTML 5, JavaScript, CSS3 ...)
+* Web (HTML 5, JavaScript, CSS3 ...)
 
+#### Installation
+1. Install PlatformIO from http://platformio.org/
+2. Open project LabMet Estação (Open Project -> Select the directory-> Ok )
+3. Install project dependencies.
+4. Compile the code and execute in NodeMCU using the respective sensors.
+5. Open in your browser “http://estacao” or download the app LabMet
+6. Enjoy!
 
-## Instalação:##
+Do not worry about the management of the station because the Raspberry is already set.
 
-* Instale PlatformIO do http://platformio.org/
-* Abra o projeto LabMet Estação (Open Project -> Selecione o diretório-> Ok )
-* Instale dependências do projeto
-* Compile o código e execute-o no NodeMCU com seus respectivos sensores
-* Abra seu navegador em “http://estacao” ou baixe o app LabMet  
-* Enjoy!
-
-Não se preocupe com o gerenciamento da estação, pois o Raspberry já está configurado.
-
-## Circuito estação NodeMCU: ##
-
-
+## NodeMCU station circuit
 
 ![circuito](https://cloud.githubusercontent.com/assets/22622042/19238248/07d708c0-8ed7-11e6-868e-79b457f4d2d6.png)
 
+## Contributing
 
-
-## Descrição do projeto##
-O NodeMCU é a estação meteorológica, o qual realiza a captura dos dados climáticos a partir de sensores adicionados a ele e, em seguida, os envia para o Raspberry por meio de conexão WiFi, utilizando autenticação de usuário e senha.
-O Raspberry recebe os dados através do MQTT, um protocolo de troca de mensagens entre Publisher e Subscriber, o intermediário no processo de comunicação é o broker, que também exige autenticação do cliente por meio de usuário e senha. A identificação das mensagens (dados recebidos) é realizado pelo broker por meio de tópicos.
- 	O Servidor é alimentado pelo broker. Os dados recebidos são tratados e enviados para o site, app e banco de dados. As produtividades potenciais são calculadas a partir dos dados recebidos pelo servidor, o modelo de cultura utilizado foi o AquaCrop descrito por Doorenbos & Kassam (1994). O banco de dados utilizado é o MongoDB.
-O funcionamento, pode ser exemplificado na Ilustração 1.
-
-
-#### Ilustração 1####
-![demonstrativo_1_labmet](https://cloud.githubusercontent.com/assets/22622042/19085103/771c335a-8a3f-11e6-8490-23a1b3c566d1.png)
-
-
-Neste exemplo, utilizamos apenas um NodeMCU e um Raspberry. Porém, pode-se adicionar vários NodeMCU em apenas um Raspberry, de forma que se tem várias estações em diferentes lugares, utilizando apenas um gerenciador, como podemos observar na Ilustração 2.
-
-
-#### Ilustração 2####
-![demonstrativo_2_labmet](https://cloud.githubusercontent.com/assets/22622042/19085120/902669d8-8a3f-11e6-85ad-532257b41262.png)
-
- Esta condição só é possível se as estações estiverem no perímetro de alcance da rede WIFi do gerenciador, sendo imprescindível a conexão para seu funcionamento correto.
-
-## Contribuidores##
-
-Criado e mantido por Lab804
-
-#### Desenvolvedores:
-
-- Bárbara Panosso
-- João Trevizoli
-- Murilo Ijanc'
-
-## Copyright e Licença##
-
-Copyright 2016 - Lab804
+Copyright (c) 2016, Lab804 -
+All rights reserved.
