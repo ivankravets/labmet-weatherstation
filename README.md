@@ -45,7 +45,9 @@ Não se preocupe com o gerenciamento da estação, pois o Raspberry já está co
 ## Circuito estação NodeMCU: ##
 
 
-![estacao_meteorologica](https://cloud.githubusercontent.com/assets/22622042/19199800/38aabf10-8c9c-11e6-8f90-4a901ef30993.png)
+
+![circuito](https://cloud.githubusercontent.com/assets/22622042/19238248/07d708c0-8ed7-11e6-868e-79b457f4d2d6.png)
+
 
 
 ## Descrição do projeto##
@@ -69,16 +71,13 @@ Neste exemplo, utilizamos apenas um NodeMCU e um Raspberry. Porém, pode-se adic
 
 ## Contribuidores##
 
-Criado e mantido por Lab804 
+Criado e mantido por Lab804
 
 #### Desenvolvedores:
 
+- Bárbara Panosso
 - João Trevizoli
 - Murilo Ijanc'
-
-#### Contribuições:
-
-
 
 ## Copyright e Licença##
 
