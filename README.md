@@ -1,4 +1,4 @@
- # Estação meteorológica com NodeMCU e Raspberry
+ # Weather station with NodeMCU and Raspberry
 
 The weather station is composed by one NodeMCU and one Raspberry. The NodeMCU captures weather data from sensors and sends them to Raspberry, which manages the receiving and sending of this data to the server. The server, for its part, treats the collected data, feed the website, application and database with the pertinent informations. In this way, the crop yield in question can be stipulated.
 
@@ -49,7 +49,7 @@ This condition is only possible if the stations are in the range of the manager'
 5. Open in your browser “http://estacao” or download the app LabMet
 6. Enjoy!
 
-Do not worry about the management of the station because the Raspberry is already set.
+Don't worry about the management of the station because the Raspberry is already set.
 
 ## NodeMCU station circuit
 
@@ -57,5 +57,10 @@ Do not worry about the management of the station because the Raspberry is alread
 
 ## Contributing
 
-Copyright (c) 2016, Lab804 -
-All rights reserved.
+Copyright (c) 2016, Lab804 - All rights reserved.
+
+#### Developers:
+
+- Bárbara Panosso
+- João Trevizoli
+- Murilo Ijanc'
