@@ -31,9 +31,11 @@ This condition is only possible if the stations are in the range of the manager'
 * Display LCD 16x2
 * 5V Power supply
 
-#### Technologies
+#### Languages
 * C/C++
 * Python
+
+#### Technologies
 * Arduino development framework
 * MongoDB
 * Flask
@@ -58,9 +60,3 @@ Don't worry about the management of the station because the Raspberry is already
 ## Contributing
 
 Copyright (c) 2016, Lab804 - All rights reserved.
-
-#### Developers:
-
-- Bárbara Panosso
-- João Trevizoli
-- Murilo Ijanc'
