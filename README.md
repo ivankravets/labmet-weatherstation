@@ -55,7 +55,8 @@ Don't worry about the management of the station because the Raspberry is already
 
 ## NodeMCU station circuit
 
-![circuito](https://cloud.githubusercontent.com/assets/22622042/19350309/91bf281c-912d-11e6-8570-85a79af861f1.png)
+![circuito](https://cloud.githubusercontent.com/assets/22622042/19351694/26adbb3c-9133-11e6-9deb-8bcb81a0384c.png)
+
 
 
 ## Contributing
