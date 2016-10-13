@@ -26,23 +26,19 @@ This condition is only possible if the stations are in the range of the manager'
 * BH1750 - Luminosity
 * DS18B20 - Soil temperature
 * BMP180 - Temperature, Pressure, Altitude
-* RTC - Clock
-* DHT22 - Temperature and Relative Humidity%
-* Soil Moisture Sensor
+* DS1307 - Real Time Clock
+* DHT22 - Temperature and Relative Humidity
+* Analogical Soil Moisture Sensor with I2C
 * Display LCD 16x2
 * 5V Power supply
 
 #### Languages
 * C/C++
-* Python
 
 #### Technologies
 * Arduino development framework
-* MongoDB
-* Flask
 * Socket IO
-* Mosquitto
-* Web (HTML 5, JavaScript, CSS3 ...)
+* MQTT
 
 #### Installation
 1. Install PlatformIO from http://platformio.org/
