@@ -13,7 +13,7 @@ Created by: Joao Trevizoli Esteves
 #ifndef CLIMATEDATALOGGER_HPP
 #define  CLIMATEDATALOGGER_HPP
 
-// -----------------------------------------------//
+// -------------------------------Include--------------------------------------//
 
 #if ARDUINO >= 100
  #include "Arduino.h"
@@ -22,12 +22,12 @@ Created by: Joao Trevizoli Esteves
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include "StationRTC.hpp"
-// -----------------------------------------------//
+// ----------------------------------------------------------------------------//
 
 const uint32_t SAMPLE_INTERVAL_MS = 2000;
 const size_t N_LEDS = 2;
 
-// -----------------------------------------------//
+// -------------------------Class Interface---------------------------------- //
 
 class ClimateDataLogger
 {

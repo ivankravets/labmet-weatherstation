@@ -12,13 +12,14 @@ Created by: Joao Trevizoli Esteves
 
 #include "StationRTC.hpp"
 
+// -------------------------Init method-------------------------------------- //
 StationRtc::StationRtc():
   rtc()
 {
 
 }
 
-// -----------------------------------------------//
+// -------------------------Public methods----------------------------------- //
 
 void StationRtc::begin()
 {
@@ -35,7 +36,7 @@ String StationRtc::formatDateTime(int n)
   return digits;
 }
 
-// -----------------------------------------------//
+// ---------------------------------------------------------------------------//
 
 String StationRtc::dateTimeNow()
 {

@@ -13,6 +13,10 @@ Created by: Barbara Panosso
 #ifndef DS18B20_HPP
 #define DS18B20_HPP
 
+// -------------------------Debug Directives--------------------------------- //
+
+#define BS18b20_DEBUG 1
+
 // -------------------------Errors------------------------------------------- //
 #define ERROR_DS18B20_NOT_FOUND "DS18B20 sensor not found"
 #define ERROR_DS18B20_START "Can't begin the ds18b20 sensor"
@@ -28,14 +32,12 @@ which indicates an mal function or an error"
 // -------------------------------------------------------------------------- //
 
 #include <DallasTemperature.h>
-#include "Errors.hpp"
 #include "Format.h"
 
-class DS18b20: public Errors
+class DS18b20
 {
 public:
-  DS18b20(DallasTemperature &dallasPtr,  uint32_t updateInterval,
-     bool debuging = true);
+  DS18b20(DallasTemperature &dallasPtr,  uint32_t updateInterval);
   // ~DS18b20();
   void begin();
   float getTemperature();
@@ -47,7 +49,6 @@ private:
   bool setTemperature();
   bool update();
 
-  bool debuging;
   uint8_t one_wire_b;
   uint32_t updateInterval;
   uint32_t previousUpdate;

@@ -1,69 +1,61 @@
-# LabMet - Estação meteorológica com NodeMCU e Raspberry ###
+ # Weather monitoring platform with NodeMCU and Raspberry
 
-A estação meteorológica é composta por um NodeMCU e um Raspberry. O NodeMCU captura dados climáticos a partir de sensores e as envia para o Raspberry, o qual  gerencia o recebimento e envio destes dados para o servidor. O servidor, por sua vez, trata os dados coletados e alimenta o site, aplicativo e banco de dados com as informações pertinentes. Desta forma, pode-se estipular a produtividade da cultura em questão.
-
-## Lista de componentes: ##
+ The weather monitoring platform is composed by NodeMCU clients and one or more RaspberryPi servers. The NodeMCUs captures environmental weather data with its sensors and sends them to the RaspberryPi. The RaspberryPi server treats the collected data and uses them as input for the FAO [AquaCrop](http://www.fao.org/nr/water/docs/irrigationdrainage66.pdf) model. With the processed data, the server feeds the website, application and database. The project is subdivided in three sub-projects, the [physical implementation](https://github.com/lab804/labmet-weatherstation) of the weather station that is consisted by the electronic circuit and C/C++ low level firmware, the RaspberryPi [Flask](http://flask.pocoo.org/) web server and [MQTT](http://mqtt.org/) broker, hosted [here](https://github.com/lab804), and the [algorithm implementation](https://github.com/lab804) of the AquaCrop model.
 
 
-* NodeMCU 1.0
-* Raspberry Pi3
-* BH1750  - Luminosidade
-* DS18B20 - Temperatura do Solo
-* BMP180 - Temperatura, Pressão, Altitude
-* RTC - Relógio
-* DHT22 - Temperatura e UR%
-* Soil Moisture Sensor
-* Display LCD 16x2p
-* Alimentação 5V
+![download](https://cloud.githubusercontent.com/assets/22622042/19200013/2f33d736-8c9d-11e6-9320-64f6caaec629.png)
 
+The NodeMCU is the weather station, which captures the weather data from the added sensors and send them to the Raspberry using an username and password authentication through an WiFi connection. The Raspberry receives the data through MQTT, a message exchange protocol between Publisher and Subscriber. The intermediary in the communication process is the broker, which also requires clients username and password authentication. The messages identification (received data) is performed by the broker by means of threads. The server is fed with the broker. The received data are treated and sent to the website, application and database. The crop yield is calculated using the received data from the server. The culture model used is AquaCrop,described by Doorenbos & Kassam (1979). The database utilized is MongoDB. It's operation can be exemplified in Figure 1.
 
-## Tecnologias:##
-
-
-* C/C++
-* Python
-* Framework de desenvolvimento Arduino
-* MongoDB
-* Flask
-* Socket IO
-* Mosquitto
-* Tecnologias Web (HTML 5, JavaScript, CSS3 ...)
-
-
-## Instalação:##
-
-* Instale PlatformIO do http://platformio.org/
-* Abra o projeto LabMet Estação (Open Project -> Selecione o diretório-> Ok )
-* Instale dependências do projeto
-* Compile o código e execute-o no NodeMCU com seus respectivos sensores
-* Abra seu navegador em “http://estacao” ou baixe o app LabMet  
-* Enjoy!
-
-Não se preocupe com o gerenciamento da estação, pois o Raspberry já está configurado.
-
-
-## Descrição do projeto##
-O NodeMCU é a estação meteorológica, o qual realiza a captura dos dados climáticos a partir de sensores adicionados a ele e, em seguida, os envia para o Raspberry por meio de conexão WiFi, utilizando autenticação de usuário e senha.
-O Raspberry recebe os dados através do MQTT, um protocolo de troca de mensagens entre Publisher e Subscriber, o intermediário no processo de comunicação é o broker, que também exige autenticação do cliente por meio de usuário e senha. A identificação das mensagens (dados recebidos) é realizado pelo broker por meio de tópicos.
- 	O Servidor é alimentado pelo broker. Os dados recebidos são tratados e enviados para o site, app e banco de dados. As produtividades potenciais são calculadas a partir dos dados recebidos pelo servidor, o modelo de cultura utilizado foi o AquaCrop descrito por Doorenbos & Kassam (1994). O banco de dados utilizado é o MongoDB.
-O funcionamento, pode ser exemplificado na Ilustração 1.
-
-
-#### Ilustração 1####
+#### Figure 1
 ![demonstrativo_1_labmet](https://cloud.githubusercontent.com/assets/22622042/19085103/771c335a-8a3f-11e6-8490-23a1b3c566d1.png)
 
 
-Neste exemplo, utilizamos apenas um NodeMCU e um Raspberry. Porém, pode-se adicionar vários NodeMCU em apenas um Raspberry, de forma que se tem várias estações em diferentes lugares, utilizando apenas um gerenciador, como podemos observar na Ilustração 2.
+In this example we use only one NodeMCU and one Raspberry. However, multiple NodeMCU can be added to one single Raspberry, so that you have several stations in different locations using a single manager, as observed in figure 2.
 
 
-#### Ilustração 2####
+#### Figure 2
 ![demonstrativo_2_labmet](https://cloud.githubusercontent.com/assets/22622042/19085120/902669d8-8a3f-11e6-85ad-532257b41262.png)
 
- Esta condição só é possível se as estações estiverem no perímetro de alcance da rede WIFi do gerenciador, sendo imprescindível a conexão para seu funcionamento correto.
+This condition is only possible if the stations are in the range of the manager's WiFi network, Which is indispensable for the components to work properly.
+
+## Getting Started
+#### Requirements
+* NodeMCU V1.0
+* Raspberry Pi3
+* BH1750 - Luminosity
+* DS18B20 - Soil temperature
+* BMP180 - Temperature, Pressure, Altitude
+* DS1307 - Real Time Clock
+* DHT22 - Temperature and Relative Humidity
+* Analogical Soil Moisture Sensor with I2C
+* Display LCD 16x2
+* 5V Power supply
+
+#### Languages
+* C/C++
+
+#### Technologies
+* Arduino development framework
+* Socket IO
+* MQTT
+
+#### Installation
+1. Install PlatformIO from http://platformio.org/
+2. Open project LabMet Estação (Open Project -> Select the directory-> Ok )
+3. Install project dependencies.
+4. Compile the code and execute in NodeMCU using the respective sensors.
+5. Open in your browser “http://estacao” or download the app LabMet
+6. Enjoy!
+
+Don't worry about the management of the station because the Raspberry is already set.
+
+## NodeMCU station circuit
+
+![circuito](https://cloud.githubusercontent.com/assets/22622042/19351694/26adbb3c-9133-11e6-9deb-8bcb81a0384c.png)
 
 
 
+## Contributing
 
-## Copyright e Licença##
-
-Copyright 2016 - Lab804
+Copyright (c) 2016, Lab804 - All rights reserved.

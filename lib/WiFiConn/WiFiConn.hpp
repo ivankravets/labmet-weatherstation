@@ -15,16 +15,21 @@ Created by: Joao Trevizoli Esteves
 
 #ifndef WIFICONN_HPP
 #define  WIFICONN_HPP
-
+// -------------------------------------------------------------------------- //
 #include <ESP8266WiFi.h>
-#include <Errors.hpp>
 #include "Format.h"
 
-class WiFiConn: public Errors
+// -------------------------Debug Directives--------------------------------- //
+
+#define WF_DEBUG 1
+
+// -------------------------------------------------------------------------- //
+
+class WiFiConn
 {
 public:
   IPAddress clientLocalIp;
-  WiFiConn(const char* SSID, const char* Password, bool debuging=true);
+  WiFiConn(const char* SSID, const char* Password);
   void begin();
   bool checkWiFi();
   void localIpChange();
@@ -36,7 +41,5 @@ private:
   const char* ssid;
   const char* password;
   bool debuging;
-
-
 };
 #endif
