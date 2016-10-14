@@ -34,6 +34,8 @@ const char* ssid = "Pi3-AP";
 const char* password = "raspberry";
 const char* ssidBroker= "NodeMCU";
 const char* passwordBroker = "123456";
+const char* stationName = "estacao";
+
 // -------------------------Object Instatiating------------------------------ //
 
 DHT dht22(DHT_PIN, DHT22);
@@ -61,7 +63,7 @@ WiFiConn wifi(ssid, password);
 WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
-BrokerClient mqtt(net, "raspberrypi", 1883, ssidBroker, passwordBroker);
+BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
 
 // -------------------------setup-------------------------------------------- //
 
