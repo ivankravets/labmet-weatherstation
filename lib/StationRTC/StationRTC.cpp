@@ -42,6 +42,7 @@ String StationRtc::dateTimeNow()
 {
   if(!this->rtc.isrunning())
   {
+    this->rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     this->rtc.begin();
     return "RTC parado";
   }
