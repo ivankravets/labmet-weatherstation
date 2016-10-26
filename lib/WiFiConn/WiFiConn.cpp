@@ -70,6 +70,8 @@ void WiFiConn::localIpChange()
 
 void WiFiConn::connect()
 {
+  WiFi.begin(this->ssid, this->password);
+  delay(1000);
   if(debuging)
   {
     printformat("Trying to connect to %s\n", this->ssid);
@@ -85,9 +87,6 @@ void WiFiConn::connect()
   if (WiFi.status() == WL_CONNECTED)
       clientLocalIp = WiFi.localIP();
       return;
-
-  WiFi.begin(this->ssid, this->password);
-  delay(1000);
 
   if (WiFi.status() == WL_CONNECTED && this->debuging)
   {

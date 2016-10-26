@@ -34,7 +34,7 @@ const char* ssid = "Pi3-AP";
 const char* password = "raspberry";
 const char* ssidBroker= "NodeMCU";
 const char* passwordBroker = "123456";
-const char* stationName = "estacao";
+const char* stationName = "weatherstation";
 
 // -------------------------Object Instatiating------------------------------ //
 
