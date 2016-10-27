@@ -1,7 +1,7 @@
 # Go green IoT - An agricultural monitoring platform with NodeMCU and Raspberry Pi
 
 
-![download](https://raw.githubusercontent.com/lab804/labmet-server/labmet_libraries/app/static/img/Logo.png =30x30)
+![download](https://raw.githubusercontent.com/lab804/labmet-server/labmet_libraries/app/static/img/Logo.png)
 
 
 The labmet is a platform that were build with a simple goal, to help people know what they are doing, and help them have the best of their own planted food.
