@@ -39,7 +39,7 @@ const char* password = "raspberry";
 const char* ssidBroker= "NodeMCU";
 const char* passwordBroker = "123456";
 const char* stationName = "weatherstation";
-
+const uint8_t nodeId = 1;
 // -------------------------Object Instatiating------------------------------ //
 
 DHT dht22(DHT_PIN, DHT22);
@@ -101,11 +101,12 @@ BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
   collectedData.dht22Humid = climate.readHum();
   collectedData.illuminance = bh1750.readIlluminanceLevel();
   collectedData.soilMoisture = sh.soilHumidityPercent(360, 981);
+  collectedData.id = nodeId;
 
   JsonGenerator *json = new JsonGenerator(collectedData);
   String payload = json->writeResponseToSerial();
   #if MAIN_DEBUG == 1
-  Serial.println(payload);
+    Serial.println(payload);
   #endif
   delete json;
 
