@@ -7,6 +7,9 @@
 
 Created by: the <lab804> Team
 */
+
+
+
 #include <Arduino.h>
 #include "ClimateDataLogger.hpp"
 #include "StationRTC.hpp"
@@ -39,7 +42,7 @@ const char* password = "raspberry";
 const char* ssidBroker= "NodeMCU";
 const char* passwordBroker = "123456";
 const char* stationName = "weatherstation";
-const uint8_t nodeId = 1;
+const uint8_t nodeId = 2;
 // -------------------------Object Instatiating------------------------------ //
 
 DHT dht22(DHT_PIN, DHT22);
@@ -68,6 +71,9 @@ WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
 BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
+// -------------------------unit test----------------------------------------- //
+
+#ifndef UNIT_TEST
 
 // -------------------------setup-------------------------------------------- //
 
@@ -118,5 +124,9 @@ BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
   delay(100);
 
   }
+
+// -------------------------end unit test------------------------------------ //
+
+#endif
 
 // -------------------------end of main-------------------------------------- //
