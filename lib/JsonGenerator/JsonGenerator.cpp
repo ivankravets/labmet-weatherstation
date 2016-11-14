@@ -23,6 +23,7 @@ void JsonGenerator::prepareData()
   newRoot["dht22_humid"] = collectedData.dht22Humid;
   newRoot["bh1750_illuminance"] = collectedData.illuminance;
   newRoot["analog_soil_moisture"] = collectedData.soilMoisture;
+  newRoot["id"] = collectedData.id;
 }
 
 // -------------------------------------------------------------------------- //
@@ -31,7 +32,7 @@ String JsonGenerator::writeResponseToSerial()
 {
   this->prepareData();
   char buffer[256];
-  this->newRoot.printTo(buffer, sizeof(buffer));
+  this->newRoot.printTo(buffer, sizeof(buffer));;
   return buffer;
 }
 // ---------------------------------end--------------------------------------- //

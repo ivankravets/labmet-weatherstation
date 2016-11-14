@@ -29,7 +29,7 @@ Created by: Barbara Panosso and João Trevizoli Esteves
 
 // -------------------------Defines------------------------------------------ //
 
-#define ID_NODEMCU  "NodeMCU01"
+#define ID_NODEMCU  "NodeMCU02"
 
 // -------------------------Callback functions interface--------------------- //
 

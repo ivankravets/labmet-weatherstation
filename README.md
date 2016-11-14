@@ -1,4 +1,4 @@
-# Go green IoT - An agricultural monitoring platform with NodeMCU and Raspberry Pi
+# Labmet Weather Station
 
 The labmet is a platform that were build with a simple goal, to help people know what they are doing when the question is agriculture by seamlessly using the agronomical best practices on their own planted food and to help them have the best with the lowest possible environmental impact.
 
