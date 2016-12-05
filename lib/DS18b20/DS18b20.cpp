@@ -38,6 +38,22 @@ float DS18b20::getTemperature()
   return  this->temperature;
 }
 
+// -------------------------------------------------------------------------- //
+
+bool DS18b20::checkSensor()
+{
+    if (!this->sensors.getAddress(this->thermometerAddr, this->one_wire_b))
+    {
+      #if BS18b20_DEBUG == 1
+        Serial.println(ERROR_DS18B20_NOT_FOUND);
+        #endif
+      this->begin();
+
+      return false;
+    }
+    return true;
+}
+
 // -------------------------Private methods---------------------------------- //
 
 void DS18b20::searchForSensors()
@@ -84,22 +100,6 @@ void DS18b20::printAddress(DeviceAddress deviceAddress)
     if (deviceAddress[i] < 16) Serial.print("0");
     Serial.print(deviceAddress[i], HEX);
   }
-}
-
-// -------------------------------------------------------------------------- //
-
-bool DS18b20::checkSensor()
-{
-    if (!this->sensors.getAddress(this->thermometerAddr, this->one_wire_b))
-    {
-      #if BS18b20_DEBUG == 1
-        Serial.println(ERROR_DS18B20_NOT_FOUND);
-        #endif
-      this->begin();
-
-      return false;
-    }
-    return true;
 }
 
 // -------------------------------------------------------------------------- //

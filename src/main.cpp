@@ -8,7 +8,11 @@
 Created by: the <lab804> Team
 */
 
+// -------------------------unit test----------------------------------------- //
 
+#ifndef UNIT_TEST
+
+// -------------------------end of unit test---------------------------------- //
 
 #include <Arduino.h>
 #include "ClimateDataLogger.hpp"
@@ -71,9 +75,6 @@ WiFiClient wifiClient;
 
 PubSubClient net(wifiClient);
 BrokerClient mqtt(net, stationName, 1883, ssidBroker, passwordBroker);
-// -------------------------unit test----------------------------------------- //
-
-#ifndef UNIT_TEST
 
 // -------------------------setup-------------------------------------------- //
 

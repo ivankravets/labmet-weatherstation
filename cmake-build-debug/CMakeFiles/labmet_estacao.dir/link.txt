@@ -1,0 +1,1 @@
+/home/joao/.platformio/packages/toolchain-xtensa/bin/xtensa-lx106-elf-g++   -g   CMakeFiles/labmet_estacao.dir/src/main.cpp.o  -o labmet_estacao -rdynamic 

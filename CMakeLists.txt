@@ -45,4 +45,10 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+add_custom_target(
+    PLATFORMIO_TESTE_PROJECT
+    COMMAND ${PLATFORMIO_CMD} test -e nodemcuv2 -v
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 add_executable(${PROJECT_NAME} ${SRC_LIST})

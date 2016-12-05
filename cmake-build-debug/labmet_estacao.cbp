@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="labmet_estacao"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_BUILD">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_BUILD"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPLOAD">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPLOAD"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_CLEAN">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_CLEAN"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_PROGRAM">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_PROGRAM"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPLOADFS">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPLOADFS"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_REBUILD_PROJECT_INDEX">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_REBUILD_PROJECT_INDEX"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_UPDATE_ALL">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_UPDATE_ALL"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="PLATFORMIO_TESTE_PROJECT">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 PLATFORMIO_TESTE_PROJECT"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="labmet_estacao">
+				<Option output="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/labmet_estacao" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DARDUINO=20300"/>
+					<Add option="-DLWIP_OPEN_SRC"/>
+					<Add option="-DF_CPU=80000000L"/>
+					<Add option="-D__ets__"/>
+					<Add option="-DICACHE_FLASH"/>
+					<Add option="-DPLATFORMIO=030100"/>
+					<Add option="-DESP8266"/>
+					<Add option="-DARDUINO_ARCH_ESP8266"/>
+					<Add option="-DARDUINO_ESP8266_NODEMCU"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/tools/sdk/include"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/tools/sdk/lwip/include"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/cores/esp8266"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/variants/nodemcu"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Wire"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/LiquidCrystal_I2C_ID576"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/Format"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/RTClib_ID83"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/StationRTC"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/DHT sensor library_ID19"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/ClimateDataLogger"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SFE_BMP180"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/PressureSensor"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WiFi/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/WiFiConn"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/BH1750"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/MAX31850 OneWire_ID748"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/MAX31850 DallasTemp_ID663"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/DS18b20"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/pubsubclient/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/BrokerClient"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SoilMoisture"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/ArduinoJson_ID64"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/JsonGenerator"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SoilHumidity"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/RBD_Timer_ID478/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/SdFat_ID322/src"/>
+					<Add directory="/home/joao/.platformio/lib/ArduinoJson_ID64"/>
+					<Add directory="/home/joao/.platformio/lib/MAX31850_DallasTemp_ID663"/>
+					<Add directory="/home/joao/.platformio/lib/MAX31850_OneWire_ID748"/>
+					<Add directory="/home/joao/.platformio/lib/WebSockets_ID549/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ArduinoOTA"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/DNSServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/EEPROM"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266AVRISP/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266HTTPClient/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266HTTPUpdateServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266SSDP"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WebServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WiFiMesh/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266httpUpdate/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266mDNS"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Ethernet/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/GDBStub/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Hash/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SD/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SPI"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Servo/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SoftwareSerial"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/TFT_Touch_Shield_V2"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Ticker"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/esp8266/src"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/xtensa-lx106-elf/include"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/lib/gcc/xtensa-lx106-elf/4.8.2/include"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/lib/gcc/xtensa-lx106-elf/4.8.2/include-fixed"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 labmet_estacao"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="labmet_estacao/fast">
+				<Option output="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/labmet_estacao" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DARDUINO=20300"/>
+					<Add option="-DLWIP_OPEN_SRC"/>
+					<Add option="-DF_CPU=80000000L"/>
+					<Add option="-D__ets__"/>
+					<Add option="-DICACHE_FLASH"/>
+					<Add option="-DPLATFORMIO=030100"/>
+					<Add option="-DESP8266"/>
+					<Add option="-DARDUINO_ARCH_ESP8266"/>
+					<Add option="-DARDUINO_ESP8266_NODEMCU"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/tools/sdk/include"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/tools/sdk/lwip/include"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/cores/esp8266"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/variants/nodemcu"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Wire"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/LiquidCrystal_I2C_ID576"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/Format"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/RTClib_ID83"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/StationRTC"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/DHT sensor library_ID19"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/ClimateDataLogger"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SFE_BMP180"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/PressureSensor"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WiFi/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/WiFiConn"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/BH1750"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/MAX31850 OneWire_ID748"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/MAX31850 DallasTemp_ID663"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/DS18b20"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/pubsubclient/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/BrokerClient"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SoilMoisture"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/ArduinoJson_ID64"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/JsonGenerator"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/lib/SoilHumidity"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/RBD_Timer_ID478/src"/>
+					<Add directory="/home/joao/ClionProjects/labmet_estacao/.piolibdeps/SdFat_ID322/src"/>
+					<Add directory="/home/joao/.platformio/lib/ArduinoJson_ID64"/>
+					<Add directory="/home/joao/.platformio/lib/MAX31850_DallasTemp_ID663"/>
+					<Add directory="/home/joao/.platformio/lib/MAX31850_OneWire_ID748"/>
+					<Add directory="/home/joao/.platformio/lib/WebSockets_ID549/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ArduinoOTA"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/DNSServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/EEPROM"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266AVRISP/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266HTTPClient/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266HTTPUpdateServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266SSDP"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WebServer/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266WiFiMesh/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266httpUpdate/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/ESP8266mDNS"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Ethernet/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/GDBStub/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Hash/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SD/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SPI"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Servo/src"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/SoftwareSerial"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/TFT_Touch_Shield_V2"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/Ticker"/>
+					<Add directory="/home/joao/.platformio/packages/framework-arduinoespressif/libraries/esp8266/src"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/xtensa-lx106-elf/include"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/lib/gcc/xtensa-lx106-elf/4.8.2/include"/>
+					<Add directory="/home/joao/.platformio/packages/toolchain-xtensa/lib/gcc/xtensa-lx106-elf/4.8.2/include-fixed"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 labmet_estacao/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/joao/ClionProjects/labmet_estacao/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/joao/ClionProjects/labmet_estacao/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/joao/ClionProjects/labmet_estacao/src/main.cpp">
+			<Option target="labmet_estacao"/>
+		</Unit>
+		<Unit filename="/home/joao/ClionProjects/labmet_estacao/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/joao/ClionProjects/labmet_estacao/CMakeListsPrivate.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

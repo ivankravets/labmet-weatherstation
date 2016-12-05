@@ -41,11 +41,11 @@ public:
   // ~DS18b20();
   void begin();
   float getTemperature();
+  bool checkSensor();
 
 private:
   void searchForSensors();
   void printAddress(DeviceAddress deviceAddress);
-  bool checkSensor();
   bool setTemperature();
   bool update();
 
