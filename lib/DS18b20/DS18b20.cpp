@@ -19,6 +19,7 @@ sensors(dallasAdd)
 {
   this->previousUpdate = 0;
   this->updateInterval = updateInterval;
+  this->restartInterval = 3000;
   this->temperature = NAN;
 }
 
@@ -26,8 +27,8 @@ sensors(dallasAdd)
 void DS18b20::begin()
 {
   this->sensors.begin();
-  this->checkSensor();
-  this->searchForSensors();
+  if(this->checkSensor());
+    this->searchForSensors();
 }
 
 // -------------------------------------------------------------------------- //
@@ -46,9 +47,7 @@ bool DS18b20::checkSensor()
     {
       #if BS18b20_DEBUG == 1
         Serial.println(ERROR_DS18B20_NOT_FOUND);
-        #endif
-      this->begin();
-
+      #endif
       return false;
     }
     return true;
@@ -106,11 +105,11 @@ void DS18b20::printAddress(DeviceAddress deviceAddress)
 
 bool DS18b20::setTemperature()
 {
-  if(!checkSensor())
+  if(!this->checkSensor())
   {
     #if BS18b20_DEBUG == 1
       Serial.println(ERROR_DS18B20_START);
-      #endif
+    #endif
     return false;
   }
   this->sensors.requestTemperatures();
@@ -131,11 +130,19 @@ bool DS18b20::setTemperature()
 // -------------------------------------------------------------------------- //
 bool DS18b20::update()
 {
-  if ((millis() - this->previousUpdate > updateInterval) ||
-   this->temperature == NAN)
+  if(this->checkSensor())
   {
+    if ((millis() - this->previousUpdate > updateInterval) ||
+     this->temperature == NAN)
+    {
+      this->previousUpdate = millis();
+      this->setTemperature();
+    }
+  }
+  else if ((millis() - this->previousUpdate > this->restartInterval))
+  {
+    this->begin();
     this->previousUpdate = millis();
-    this->setTemperature();
   }
 }
 

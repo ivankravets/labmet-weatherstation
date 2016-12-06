@@ -50,9 +50,10 @@ private:
   bool update();
 
   uint8_t one_wire_b;
+  uint32_t restartInterval;
   uint32_t updateInterval;
   uint32_t previousUpdate;
-  float temperature;
+  float temperature = -127;
 
   // OneWire *oneWirePtr;
   DallasTemperature sensors;
