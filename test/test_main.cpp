@@ -39,11 +39,8 @@ void setup()
 {
   Wire.begin();
   ds18b20.begin();
+  delay(1000);
   pinMode(LED_BUILTIN, OUTPUT);
-}
-
-void loop()
-{
   UNITY_BEGIN();
 
 // -------------------------I2C Devices-------------------------------------- //
@@ -60,6 +57,10 @@ void loop()
   RUN_TEST(test_ds18B20_begin);
   RUN_TEST(test_ds18B20_improper_value);
   UNITY_END();
+}
+
+void loop()
+{
 }
 
 // -------------------------Unittests---------------------------------------- //
