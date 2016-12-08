@@ -22,17 +22,8 @@ void test_ds18B20_improper_value(void);
 void test_bh1750_lum_raw_working(void);
 void test_bh1750_lum_working(void);
 //----------BMP180 Pressure-------- //
+void test_bmp180_temperature(void);
 
-
-//----------------------------------//
-void setUp(void)
-{
-}
-
-void tearDown(void)
-{
-
-}
 // -------------------------Defines------------------------------------------ //
 
 #define ONE_WIRE_BUS D3
@@ -74,6 +65,7 @@ void setup()
   RUN_TEST(test_rtc_addr);
   RUN_TEST(test_rtc_addr_2);
 
+
 // -------------------------Dallas Temperature------------------------------- //
 
   RUN_TEST(test_ds18B20_begin);
@@ -85,6 +77,12 @@ void setup()
   RUN_TEST(test_bh1750_lum_working);
 
 // ------------------------BMP180 Pressure----------------------------------- //
+
+  for (size_t i = 0; i < 5; i++)
+  {
+    test_bmp180_temperature();
+    delay(5000);
+  }
 
 
 // -------------------------------------------------------------------------- //
@@ -183,6 +181,10 @@ void test_bh1750_lum_working(void)
 }
 // ------------------------BMP180 Pressure----------------------------------- //
 
+void test_bmp180_temperature(void)
+{
+  pressureSensor.printAll();
+}
 
 // -------------------------Generic Tests------------------------------------ //
 

@@ -58,6 +58,7 @@ char status;
 uint32_t previousUpdate;
 uint32_t updateInterval;
 int oversampling;
+bool started;
 double seaPressure;
 double temperature;
 double pressure;

@@ -19,6 +19,7 @@ PressureSensor::PressureSensor(SFE_BMP180 &bmp180Ptr, uint32_t updateInterval,
 bmp180(bmp180Ptr)
 {
 
+  this->started = false;
   this->previousUpdate = 0;
   this->temperature = NAN;
   this->pressure = NAN;
@@ -32,18 +33,25 @@ bmp180(bmp180Ptr)
 
 void PressureSensor::begin()
 {
-  while (!this->bmp180.begin())
+  if (this->started == false)
   {
-    #if BMP_DEBUG == 1
-      Serial.println(format(ERROR_BMP180_START));
+    if (this->bmp180.begin())
+    {
+      delay(100);
+      this->setTemperature();
+      this->setPressure();
+      this->setAltitude();
+      this->started = true;
+    }
+    else
+    {
+      #if BMP_DEBUG == 1
+        Serial.println(format(ERROR_BMP180_START));
       #endif
-
-    delay(100);
+    }
   }
-  delay(100);
-  this->setTemperature();
-  this->setPressure();
-  this->setAltitude();
+
+
 }
 // -------------------------------------------------------------------------- //
 float PressureSensor::getTemperature()
@@ -101,10 +109,10 @@ bool PressureSensor::setTemperature()
       #if BMP_DEBUG == 1
         Serial.println(ERROR_BMP180_TEMP_START);
         #endif
+      this->temperature = NAN;
       return false;
     }
     delay(status);
-
     status = this->bmp180.getTemperature(this->temperature);
     return true;
   }
@@ -116,7 +124,8 @@ bool PressureSensor::setPressure()
   {
     #if BMP_DEBUG == 1
       Serial.println(ERROR_BMP180_PRESSURE_START);
-      #endif
+    #endif
+    this->pressure = NAN;
     return false;
   }
 
@@ -149,10 +158,18 @@ void PressureSensor::update()
 {
     if((millis() - this->previousUpdate) > updateInterval)
     {
-      this->previousUpdate = millis();
-      this->setTemperature();
-      this->setPressure();
-      this->setAltitude();
+      if (this->started == true)
+      {
+        this->previousUpdate = millis();
+        this->setTemperature();
+        this->setPressure();
+        this->setAltitude();
+      }
+      else
+      {
+        this->previousUpdate = millis();
+        this->begin();
+      }
     }
 }
 // -------------------------------------------------------------------------- //
