@@ -80,20 +80,33 @@ float  PressureSensor::getAltitude()
   return this->altitude;
 }
 // -------------------------------------------------------------------------- //
-void PressureSensor::printAll()
+bool PressureSensor::printAll()
 {
-  if((millis() - this->previousUpdate) > updateInterval)
+  if(Serial && this->started == true)
   {
-  String bmpPrintData = "Pressure: ";
-  bmpPrintData += this->pressure;
-  bmpPrintData += " Temperature: ";
-  bmpPrintData += this->temperature;
-  bmpPrintData += " Altitude: ";
-  bmpPrintData += this->altitude;
+    if((millis() - this->previousUpdate) > updateInterval)
+    {
+      String bmpPrintData = "Pressure: ";
+      bmpPrintData += this->pressure;
+      bmpPrintData += " Temperature: ";
+      bmpPrintData += this->temperature;
+      bmpPrintData += " Altitude: ";
+      bmpPrintData += this->altitude;
 
-  Serial.println(bmpPrintData);
-  this->update();
+      Serial.println(bmpPrintData);
+      this->update();
+    }
+    return true;
   }
+  else
+  {
+    return false;
+  }
+}
+// -------------------------------------------------------------------------- //
+bool PressureSensor::getSensorStarted()
+{
+  return this->started;
 }
 // -------------------------Private methods---------------------------------- //
 inline void  PressureSensor::printErrors(const char *msg)

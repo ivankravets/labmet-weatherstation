@@ -46,7 +46,8 @@ void begin();
 float getTemperature();
 float getPressure();
 float getAltitude();
-void printAll();
+bool printAll();
+bool getSensorStarted();
 
 private:
 inline void printErrors(const char *msg);

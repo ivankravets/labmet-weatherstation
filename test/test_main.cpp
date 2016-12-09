@@ -7,6 +7,8 @@
 #include "BH1750.hpp"
 #include "PressureSensor.hpp"
 
+// -------------------------NodeMCU------------------------------------------ //
+void test_nodemcu_defines_pinage();
 //----------One Wire Devices-------- //
 byte wire_setup(byte addr);
 void test_count_i2c_devices(void);
@@ -21,9 +23,14 @@ void test_ds18B20_improper_value(void);
 //----------BH1750----------------- //
 void test_bh1750_lum_raw_working(void);
 void test_bh1750_lum_working(void);
+//----------BMP180 Pressure----(void);
+void test_bh1750_lum_working(void);
 //----------BMP180 Pressure-------- //
+void test_bmp180_started(void);
 void test_bmp180_temperature(void);
-
+void test_bmp180_pressure(void);
+void test_bmp180_altitude(void);
+void test_bmp180_printall(void);
 // -------------------------Defines------------------------------------------ //
 
 #define ONE_WIRE_BUS D3
@@ -55,6 +62,9 @@ void setup()
   delay(1000);
   pinMode(LED_BUILTIN, OUTPUT);
   UNITY_BEGIN();
+// -------------------------NodeMCU------------------------------------------ //
+
+RUN_TEST(test_nodemcu_defines_pinage);
 
 // -------------------------I2C Devices-------------------------------------- //
 
@@ -64,7 +74,6 @@ void setup()
   RUN_TEST(test_bmp180_addr);
   RUN_TEST(test_rtc_addr);
   RUN_TEST(test_rtc_addr_2);
-
 
 // -------------------------Dallas Temperature------------------------------- //
 
@@ -78,12 +87,11 @@ void setup()
 
 // ------------------------BMP180 Pressure----------------------------------- //
 
-  for (size_t i = 0; i < 5; i++)
-  {
-    test_bmp180_temperature();
-    delay(5000);
-  }
-
+  RUN_TEST(test_bmp180_started);
+  RUN_TEST(test_bmp180_temperature);
+  RUN_TEST(test_bmp180_pressure);
+  RUN_TEST(test_bmp180_altitude);
+  RUN_TEST(test_bmp180_printall);
 
 // -------------------------------------------------------------------------- //
 
@@ -94,10 +102,7 @@ void loop()
 {
 }
 
-// -------------------------Unittests---------------------------------------- //
-
-// -------------------------I2C Devices-------------------------------------- //
-
+// -------------------------Generic Functions-------------------------------- //
 byte wire_setup(byte addr)
 {
   byte error;
@@ -105,6 +110,17 @@ byte wire_setup(byte addr)
   error = Wire.endTransmission();
   return error;
 }
+// -------------------------Unittests---------------------------------------- //
+// -------------------------NodeMCU------------------------------------------ //
+void test_nodemcu_defines_pinage()
+{
+  uint8_t built_in_pinage_defines[11] = {D0, D1, D2, D3, D4,
+    D5, D6, D7, D8, D9, D10};
+  uint8_t built_in_pinage_numbers[11] = {16, 8, 4, 0, 2, 14,
+    12, 13, 15, 3, 1};
+  TEST_ASSERT_EQUAL_UINT8_ARRAY(built_in_pinage_numbers, built_in_pinage_numbers, 11);
+}
+// -------------------------I2C Devices-------------------------------------- //
 
 void test_count_i2c_devices(void)
 {
@@ -181,12 +197,29 @@ void test_bh1750_lum_working(void)
 }
 // ------------------------BMP180 Pressure----------------------------------- //
 
-void test_bmp180_temperature(void)
+void test_bmp180_started(void)
 {
-  pressureSensor.printAll();
+  TEST_ASSERT_TRUE(pressureSensor.getSensorStarted());
 }
 
-// -------------------------Generic Tests------------------------------------ //
+void test_bmp180_temperature(void)
+{
+  TEST_ASSERT_FLOAT_IS_NOT_NAN(pressureSensor.getTemperature());
+}
 
+void test_bmp180_pressure(void)
+{
+  TEST_ASSERT_FLOAT_IS_NOT_NAN(pressureSensor.getPressure());
+}
+
+void test_bmp180_altitude(void)
+{
+  TEST_ASSERT_FLOAT_IS_NOT_NAN(pressureSensor.getAltitude());
+}
+
+void test_bmp180_printall(void)
+{
+  TEST_ASSERT_TRUE(pressureSensor.printAll());
+}
 // -------------------------------------------------------------------------- //
 #endif
