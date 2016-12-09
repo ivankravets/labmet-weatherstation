@@ -9,7 +9,7 @@ byte wire_setup(byte addr)
   return error;
 }
 
-// -------------------------I2C Devices-------------------------------------- //
+// -------------------------Unit tests--------------------------------------- //
 
 void test_count_i2c_devices(void)
 {
@@ -27,11 +27,15 @@ void test_count_i2c_devices(void)
   TEST_ASSERT_EQUAL(5, nDevices);
 }
 
+// -------------------------------------------------------------------------- //
+
 void test_lcd_screen_addr(void)
 {
   byte error = wire_setup(0x27);
   TEST_ASSERT_EQUAL(0, error);
 }
+
+// -------------------------------------------------------------------------- //
 
 void test_bh1750_addr(void)
 {
@@ -39,11 +43,15 @@ void test_bh1750_addr(void)
   TEST_ASSERT_EQUAL(0, error);
 }
 
+// -------------------------------------------------------------------------- //
+
 void test_bmp180_addr(void)
 {
   byte error = wire_setup(0x77);
   TEST_ASSERT_EQUAL(0, error);
 }
+
+// -------------------------------------------------------------------------- //
 
 void test_rtc_addr(void)
 {
@@ -51,8 +59,12 @@ void test_rtc_addr(void)
   TEST_ASSERT_EQUAL(0, error);
 }
 
+// -------------------------------------------------------------------------- //
+
 void test_rtc_addr_2(void)
 {
   byte error = wire_setup(0x50);
   TEST_ASSERT_EQUAL(0, error);
 }
+
+// -------------------------End of unit tests--------------------------------- //

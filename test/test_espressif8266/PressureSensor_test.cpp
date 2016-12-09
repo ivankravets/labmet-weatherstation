@@ -5,7 +5,8 @@
 SFE_BMP180 bmp180;
 PressureSensor pressureSensor(bmp180, 1000);
 
-// ------------------------Pressure Sensor BMP180---------------------------- //
+// -------------------------Unit tests--------------------------------------- //
+
 void pressureBegin(void)
 {
     pressureSensor.begin();

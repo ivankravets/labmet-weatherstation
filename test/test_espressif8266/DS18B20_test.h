@@ -12,10 +12,11 @@
 
 #define ONE_WIRE_BUS D3
 
+// -------------------------Dallas Temperature Sensors----------------------- //
 
-// //----------Dallas Temperature----- //
 void test_ds18B20_begin (void);
 void test_ds18B20_improper_value(void);
-//------------------------------------ //
+
+// -------------------------------------------------------------------------- //
 
 #endif
