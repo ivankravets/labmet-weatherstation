@@ -68,12 +68,11 @@ the components work properly.
 * MQTT
 
 #### Installation
-1. Install the atom text editor from https://atom.io/
-2. Install PlatformIO from http://platformio.org/
-3. Download and open the project in the IDE (Open Project -> Select the directory-> Ok )
-4. The project dependencies will be installed on the fly, so a internet conextion is required.
-5. Compile the code and execute in NodeMCU using the respective sensors.
-6. Enjoy!
+1. Install PlatformIO IDE from http://platformio.org/platformio-ide
+2. Download and open the project in the IDE (Open Project -> Select the directory-> Ok )
+3. The project dependencies will be installed on the fly, so the Internet connection is required.
+4. Compile the code and execute in NodeMCU using the respective sensors.
+5. Enjoy!
 
 Don't worry about the weather station management and RaspberryPi server configuration, just run this [shell script](https://github.com/lab804/generate-ap) on your raspbian based RaspberryPi and all will be automatically set for you ;)
 
